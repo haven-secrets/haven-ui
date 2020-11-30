@@ -1,9 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+import "semantic-ui-css/semantic.min.css";
+import logo from "./logo.svg";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
+      <button class="ui button">Example SemanticUI button</button>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
