@@ -9,7 +9,6 @@ import UserDashboard from "./components/users/UserDashboard";
 import HavenHeader from "./components/common/HavenHeader";
 import SelectProject from "./components/SelectProject";
 import SelectEnvironment from "./components/SelectEnvironment";
-import Generic from "./components/Generic";
 import Logs from "./components/logs/Logs";
 import Project from "./components/Project";
 
