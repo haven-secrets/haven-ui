@@ -1,26 +1,13 @@
-import React from "react";
-import { Container, Header, Menu } from "semantic-ui-react";
+import { Menu } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
 
 function Nav() {
-  return (
-    <Container textAlign="left">
-      <Header
-        as="h1"
-        content="Haven"
-        style={{
-          fontSize: "4em",
-          fontWeight: "normal",
-          marginBottom: 0,
-          marginTop: ".5em",
-        }}
-      />
-      <Menu secondary style={{ fontSize: "1.5em" }}>
-        <Menu.Item name="Projects" />
-        <Menu.Item name="Users" />
-        <Menu.Item name="Logs" />
-      </Menu>
-    </Container>
-  );
+	return (
+		<Menu secondary style={{ fontSize: "1.5em" }}>
+			<Menu.Item as={NavLink} to="/projects" name="Projects" />
+			<Menu.Item as={NavLink} to="/users" name="Users" />
+			<Menu.Item as={NavLink} to="/logs" name="Logs" />
+		</Menu>
+	);
 }
-
 export default Nav;

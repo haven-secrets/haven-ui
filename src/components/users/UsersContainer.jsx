@@ -21,7 +21,6 @@ function UsersContainer({ users, onDeleteUser }) {
   return (
     <div id="users-container">
       <Container>
-        <Divider />
         <Header size="large">Users</Header>
         <List animated verticalAlign="middle" size="huge">
           {users.map((user, i) => (
