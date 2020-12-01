@@ -1,12 +1,12 @@
 import React from "react";
-import { Container, Header, Divider } from "semantic-ui-react";
+import { Header, Divider } from "semantic-ui-react";
 import Welcome from "../Welcome.js";
 import Nav from "./Nav.js";
 
 // TODO: decide if we want a <Welcome /> in our app at all.
 function HavenHeader() {
   return (
-    <Container textAlign="left">
+    <div>
       <Header
         as="h1"
         content="Haven"
@@ -21,7 +21,7 @@ function HavenHeader() {
 
       <Welcome />
       <Divider style={{ marginBottom: "1.5em" }} />
-    </Container>
+    </div>
   );
 }
 
