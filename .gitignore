@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# unignore this when our dependencies are final
+yarn.lock
+
+# eslint cache
+.eslintcache
+
 # testing
 /coverage
 
