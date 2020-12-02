@@ -24,7 +24,7 @@ class LogsDashboard extends React.Component {
     this.props.fetchLogs();
   }
 
-  componentDidUpdate(prevProps) {
+  resetInitialState() {
     if (
       this.props.logs?.length > 0 &&
       this.state.filteredLogs?.length === 0 &&
@@ -115,7 +115,7 @@ class LogsDashboard extends React.Component {
   }
 
   render() {
-    if (!this.props.logs) return "";
+    this.resetInitialState();
     return (
       <div>
         <h1>Logs</h1>
@@ -134,7 +134,9 @@ class LogsDashboard extends React.Component {
           formatDropdownElements(this.state.environments, "environment"),
           "environmentSelected"
         )}
-        <LogList logs={this.state.filteredLogs} />
+        <LogList
+          logs={this.state.filteredLogs}
+        />
       </div>
     );
   }
