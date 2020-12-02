@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import User from "./User";
-import { Container, Header, List, Button, Divider } from "semantic-ui-react";
+import { Header, List } from "semantic-ui-react";
 
 const mapStateToProps = (state) => {
   return {
@@ -23,7 +23,7 @@ function UsersContainer({ users, onDeleteUser }) {
       <Header size="large">Users</Header>
       <List animated verticalAlign="middle" size="huge">
         {users.map((user, i) => (
-          <User userName={user} key={i} />
+          <User userName={user.userName} key={i} onDeleteUser={onDeleteUser} />
         ))}
       </List>
     </div>

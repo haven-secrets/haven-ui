@@ -1,11 +1,13 @@
 import React from "react";
-import { Container, Header, List, Button, Divider } from "semantic-ui-react";
+import { List, Button } from "semantic-ui-react";
 
 const User = (props) => {
   return (
     <List.Item>
       <List.Content floated="right">
-        <Button color="red">Delete</Button>
+        <Button color="red" onClick={() => props.onDeleteUser(props.userName)}>
+          Delete
+        </Button>
       </List.Content>
       <List.Icon name="users" />
       <List.Content>{props.userName}</List.Content>

@@ -9,10 +9,9 @@ const PermittedUser = ({ user }) => {
       </List.Content>
       <List.Icon name="user" />
       <List.Content>
-        <List.Header>
-          {user}
-        </List.Header>
-        Read, Write
+        <List.Header>{user.userName}</List.Header>
+        {user.read ? "Read " : ""}
+        {user.write ? "Write" : ""}
       </List.Content>
     </List.Item>
   );

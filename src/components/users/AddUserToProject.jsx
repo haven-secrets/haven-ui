@@ -1,17 +1,26 @@
 import React from "react";
-import { Input, Select, Button, Icon } from "semantic-ui-react";
+import { Input, Select, Button, Icon, Dropdown } from "semantic-ui-react";
 
-const AddUserToProject = () => {
+const AddUserToProject = (props) => {
   const options = [
     { key: "read", text: "Read", value: "read" },
     { key: "write", text: "Write", value: "write" },
     { key: "both", text: "Both", value: "both" },
-  ]
-
+  ];
+  const userOptions = props.users.map((user) => {
+    return { key: user.userName, value: user.userName, text: user.userName };
+  });
+  console.log(props.users);
   // TODO: maybe change select to checkbox
   return (
     <div>
-      <Input icon="add user" iconPosition="left" placeholder="Add a user..." />
+      <Dropdown
+        placeholder="Select User"
+        fluid
+        search
+        selection
+        options={userOptions}
+      />
       <Select compact options={options} defaultValue="read" />
       <Button>
         <Icon name="unlock alternate" />
