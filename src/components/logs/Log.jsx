@@ -9,28 +9,25 @@ const SegmentExampleSegments = (params) => (
         <b>Project:</b> {params["Project"].S}
       </Segment>
       <Segment>
-        <b>SecretName:</b> {params["SecretName"].S}
-      </Segment>
-      <Segment>
-        <b>DateTime:</b> {params["DateTime"].S}
-      </Segment>
-      <Segment>
-        <b>Response:</b> {params["Response"].S}
+        <b>Environment:</b> {params["Environment"].S}
       </Segment>
       <Segment>
         <b>EventType:</b> {params["EventType"].S}
       </Segment>
       <Segment>
-        <b>Version:</b> {params["Version"].S}
-      </Segment>
-      <Segment>
-        <b>PK:</b> {params["PK"].S}
+        <b>DateTime:</b> {params["DateTime"].S}
       </Segment>
       <Segment>
         <b>UserName:</b> {params["UserName"].S}
       </Segment>
       <Segment>
-        <b>Environment:</b> {params["Environment"].S}
+        <b>SecretName:</b> {params["SecretName"].S}
+      </Segment>
+      <Segment>
+        <b>Version:</b> {params["Version"].S}
+      </Segment>
+      <Segment>
+        <b>Response:</b> {params["Response"].S}
       </Segment>
     </Segment.Group>
   </Segment.Group>
