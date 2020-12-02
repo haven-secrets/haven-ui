@@ -3,16 +3,16 @@ import { Header, List } from "semantic-ui-react";
 import PermittedUser from "./PermittedUser";
 import AddUserToProject from "./AddUserToProject";
 
-const PermittedUserList = () => {
-  const users = ["Developer 1", "Developer 2", "Server 1", "Server 2"];
-
+const PermittedUserList = (props) => {
   return (
     <div>
       <Header size="large">Access</Header>
       <List celled animated verticalAlign="middle" size="large">
-        {users.map((user) => <PermittedUser user={user} />)}
+        {props.permittedUsers.map((user) => (
+          <PermittedUser user={user} />
+        ))}
       </List>
-      <AddUserToProject />
+      <AddUserToProject users={props.disallowedUsers} />
     </div>
   );
 };

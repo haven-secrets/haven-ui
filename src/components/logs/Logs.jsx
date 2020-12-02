@@ -273,11 +273,9 @@ class Logs extends React.Component {
     if (value.type === "user") selected = "userSelected";
     else if (value.type === "project") selected = "projectSelected";
     else selected = e.currentTarget.parentNode.getAttribute("stateName");
-    console.log(selected);
     const filteredlogs = selected.startsWith("user")
       ? this.filterLogs(this.state.projectSelected, value.value)
       : this.filterLogs(value.value, this.state.userSelected);
-    console.log(filteredlogs);
     this.setState({ [selected]: value.value, filteredlogs: filteredlogs });
   };
 

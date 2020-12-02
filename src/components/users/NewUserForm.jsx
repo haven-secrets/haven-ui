@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Header,
-  List,
-  Button,
-  Menu,
-  Divider,
-  Form,
-} from "semantic-ui-react";
+import { Container, Button, Form } from "semantic-ui-react";
 
 class NewUserForm extends React.Component {
   state = {
