@@ -20,7 +20,7 @@ const userTestArray = [
 export default function users(state = userTestArray, action) {
   switch (action.type) {
     case "CREATE_USER_SUCCESS":
-      return state.concat({ userName: action.payload });
+      return state.concat({ userName: action.payload, groups: [] });
     case "DELETE_USER_SUCCESS":
       return state.filter((user) => user.userName !== action.payload);
     default:

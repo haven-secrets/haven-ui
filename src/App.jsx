@@ -9,7 +9,7 @@ import UserDashboard from "./components/users/UserDashboard";
 import HavenHeader from "./components/common/HavenHeader";
 import SelectProject from "./components/SelectProject";
 import SelectEnvironment from "./components/SelectEnvironment";
-import Logs from "./components/logs/Logs";
+import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
 import Project from "./components/Project";
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
             <Route path="/" exact render={SelectProject} />
             <Route path="/projects" exact render={SelectProject} />
             <Route path="/users" exact render={UserDashboard} />
-            <Route path="/logs" exact render={() => <Logs />} />
+            <Route path="/logs" exact component={LogsDashboardContainer} />
             <Route path="/:project/:environment" render={Project} />
             <Route path="/:project" render={SelectEnvironment} />
           </Switch>
