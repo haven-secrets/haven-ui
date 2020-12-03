@@ -8,8 +8,8 @@ const PermittedUserList = (props) => {
     <div>
       <Header size="large">Access</Header>
       <List celled animated verticalAlign="middle" size="large">
-        {props.permittedUsers.map((user) => (
-          <PermittedUser user={user} />
+        {props.permittedUsers.map((user, i) => (
+          <PermittedUser user={user} key={i} />
         ))}
       </List>
       <AddUserToProject users={props.disallowedUsers} />

@@ -1,4 +1,3 @@
-import React from "react";
 import LogsDashboard from "./LogsDashboard";
 import { connect } from "react-redux";
 import { logs } from "../../data/logs.js";

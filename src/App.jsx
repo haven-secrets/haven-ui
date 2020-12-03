@@ -4,15 +4,16 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
 import store from "./store";
-import "./App.css";
+
 import UserDashboard from "./components/users/UserDashboard";
 import Nav from "./components/common/Nav";
-import SelectProject from "./components/SelectProject";
+
 import SelectEnvironment from "./components/SelectEnvironment";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
 import "semantic-ui-css/semantic.min.css";
-import Project from "./components/Project";
-import ProjectContainer from "./components/ProjectContainer";
+import Project from "./components/projects/Project";
+import SelectProjectDashboard from "./components/projects/SelectProjectDashboard";
+
 function App() {
   return (
     <Container textAlign="left">
@@ -20,12 +21,12 @@ function App() {
         <Router>
           <Nav />
           <Switch>
-            <Route path="/" exact component={ProjectContainer} />
-            <Route path="/projects" exact component={ProjectContainer} />
+            <Route path="/" exact render={SelectProjectDashboard} />
+            <Route path="/projects" exact render={SelectProjectDashboard} />
             <Route path="/users" exact render={UserDashboard} />
             <Route path="/logs" exact component={LogsDashboardContainer} />
-            <Route path="/:project/:environment" render={ProjectContainer} />
-            <Route path="/:project" render={SelectEnvironment} />
+            <Route path="/projects/:project/:environment" render={Project} />
+            <Route path="/projects/:project" render={SelectEnvironment} />
           </Switch>
         </Router>
       </Provider>

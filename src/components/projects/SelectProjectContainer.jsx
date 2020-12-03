@@ -1,21 +1,8 @@
 import React from "react";
 import SelectProject from "./SelectProject";
 import { connect } from "react-redux";
-import { groupsForUsers } from "../data/groupsForUsers.js";
+import { groupsForUsers } from "../../data/groupsForUsers.js";
 
-// const groupsForUsers = [
-//   "HavenSecretsLogGroup",
-//   "HavenSecretsTest1DevReadGroup",
-//   "HavenSecretsTest1ProdReadGroup",
-//   "HavenSecretsTest1StgReadGroup",
-//   "HavenSecretsTest1DevWriteGroup",
-//   "HavenSecretsTest1ProdWriteGroup",
-//   "HavenSecretsTest1StgWriteGroup",
-//   "HavenSecretsTest2DevReadGroup",
-//   "HavenSecretsTest2ProdReadGroup",
-//   "HavenSecretsTest2StgReadGroup",
-//   "HavenSecretsTest2DevWriteGroup",
-// ];
 const distillProjectsInfoFromGroups = (array) => {
   const projectsInfo = [];
 
@@ -30,7 +17,6 @@ const distillProjectsInfoFromGroups = (array) => {
       const existingProject = projectsInfo.find(
         (project) => project.projectName === projectName
       );
-      console.log(existingProject);
       if (existingProject) {
         if (existingProject.environments[environments]) {
           existingProject.environments[environments].push(permissions);

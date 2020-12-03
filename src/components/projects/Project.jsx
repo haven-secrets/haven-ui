@@ -1,7 +1,7 @@
 // import React from "react";
 import { Header, Divider } from "semantic-ui-react";
-import SecretList from "./secrets/SecretList";
-import PermittedUserListContainer from "./users/PermittedUserListContainer";
+import SecretList from "../secrets/SecretList";
+import PermittedUserListContainer from "../users/PermittedUserListContainer";
 
 const Project = ({ match }) => {
   const projectName = match.params.project;
