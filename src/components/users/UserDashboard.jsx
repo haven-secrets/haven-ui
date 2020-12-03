@@ -1,6 +1,7 @@
 import React from "react";
 import UsersContainer from "./UsersContainer";
 import NewUserFormContainer from "./NewUserFormContainer";
+import { Segment } from "semantic-ui-react";
 
 const UserDashboard = () => (
   <div
@@ -9,7 +10,9 @@ const UserDashboard = () => (
     }}
   >
     <UsersContainer />
-    <NewUserFormContainer />
+    <Segment>
+      <NewUserFormContainer />
+    </Segment>
   </div>
 );
 
