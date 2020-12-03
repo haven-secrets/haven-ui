@@ -10,6 +10,7 @@ import Nav from "./components/common/Nav";
 
 import SelectEnvironment from "./components/SelectEnvironment";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
+import "semantic-ui-css/semantic.min.css";
 import Project from "./components/projects/Project";
 import SelectProjectDashboard from "./components/projects/SelectProjectDashboard";
 

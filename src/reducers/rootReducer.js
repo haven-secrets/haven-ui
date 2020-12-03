@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 import users from "./users";
 import logs from "./logs";
+import projectsInfo from "./projectsInfo";
 import secrets from "./secrets";
-import projects from "./projects";
 
-const rootReducer = combineReducers({ users, logs, secrets, projects });
+const rootReducer = combineReducers({ users, logs, secrets, projectsInfo });
 
 export default rootReducer;
