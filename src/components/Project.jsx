@@ -8,8 +8,12 @@ const Project = ({ match }) => {
   const environment = match.params.environment;
 
   return (
-    <div>
-      <Header size="large">{projectName}</Header>
+    <div
+      style={{
+        marginTop: "12em",
+      }}
+    >
+      <Header size="huge">{projectName}</Header>
       <Header size="medium" style={{ marginBottom: "2em" }}>
         {environment}
       </Header>

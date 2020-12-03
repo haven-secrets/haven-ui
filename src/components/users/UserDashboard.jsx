@@ -3,7 +3,11 @@ import UsersContainer from "./UsersContainer";
 import NewUserFormContainer from "./NewUserFormContainer";
 
 const UserDashboard = () => (
-  <div>
+  <div
+    style={{
+      marginTop: "12em",
+    }}
+  >
     <UsersContainer />
     <NewUserFormContainer />
   </div>

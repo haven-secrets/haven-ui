@@ -6,8 +6,13 @@ function SelectEnvironment({ match }) {
   const ENVIRONMENTS = ["Development", "Production", "Staging"]; // TEMPORARY
 
   return (
-    <div class="indentedList">
-      <Header size="large">{projectName}</Header>
+    <div
+      class="indentedList"
+      style={{
+        marginTop: "12em",
+      }}
+    >
+      <Header size="huge">{projectName}</Header>
       <Header size="medium">Select An Environment:</Header>
       <List link>
         {ENVIRONMENTS.map((environment) => {
