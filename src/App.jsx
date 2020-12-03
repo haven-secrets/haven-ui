@@ -12,7 +12,7 @@ import SelectEnvironment from "./components/SelectEnvironment";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
 import "semantic-ui-css/semantic.min.css";
 import Project from "./components/Project";
-
+import ProjectContainer from "./components/ProjectContainer";
 function App() {
   return (
     <Container textAlign="left">
@@ -20,11 +20,11 @@ function App() {
         <Router>
           <Nav />
           <Switch>
-            <Route path="/" exact render={SelectProject} />
-            <Route path="/projects" exact render={SelectProject} />
+            <Route path="/" exact component={ProjectContainer} />
+            <Route path="/projects" exact component={ProjectContainer} />
             <Route path="/users" exact render={UserDashboard} />
             <Route path="/logs" exact component={LogsDashboardContainer} />
-            <Route path="/:project/:environment" render={Project} />
+            <Route path="/:project/:environment" render={ProjectContainer} />
             <Route path="/:project" render={SelectEnvironment} />
           </Switch>
         </Router>
