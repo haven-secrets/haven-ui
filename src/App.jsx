@@ -6,10 +6,11 @@ import { Container } from "semantic-ui-react";
 import store from "./store";
 import "./App.css";
 import UserDashboard from "./components/users/UserDashboard";
-import HavenHeader from "./components/common/HavenHeader";
+import Nav from "./components/common/Nav";
 import SelectProject from "./components/SelectProject";
 import SelectEnvironment from "./components/SelectEnvironment";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
+import "semantic-ui-css/semantic.min.css";
 import Project from "./components/Project";
 
 function App() {
@@ -17,8 +18,7 @@ function App() {
     <Container textAlign="left">
       <Provider store={store}>
         <Router>
-          <HavenHeader />
-
+          <Nav />
           <Switch>
             <Route path="/" exact render={SelectProject} />
             <Route path="/projects" exact render={SelectProject} />

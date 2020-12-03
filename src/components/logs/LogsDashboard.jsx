@@ -1,6 +1,6 @@
 import React from "react";
 import LogList from "./LogList";
-import { Dropdown } from "semantic-ui-react";
+import { Dropdown, Header } from "semantic-ui-react";
 
 const formatDropdownElements = (array, type) => {
   return array.map((element) => ({
@@ -117,8 +117,12 @@ class LogsDashboard extends React.Component {
   render() {
     this.resetInitialState();
     return (
-      <div>
-        <h1>Logs</h1>
+      <div
+        style={{
+          marginTop: "12em",
+        }}
+      >
+        <Header size="huge">Logs</Header>
         {this.DropdownExampleSearchSelection(
           "Project Selection",
           formatDropdownElements(this.state.projects, "project"),
@@ -134,9 +138,7 @@ class LogsDashboard extends React.Component {
           formatDropdownElements(this.state.environments, "environment"),
           "environmentSelected"
         )}
-        <LogList
-          logs={this.state.filteredLogs}
-        />
+        <LogList logs={this.state.filteredLogs} />
       </div>
     );
   }

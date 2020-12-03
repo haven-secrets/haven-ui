@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch) => {
 function UsersContainer({ users, onDeleteUser }) {
   return (
     <div id="users-container">
-      <Header size="large">Users</Header>
+      <Header size="huge">Users</Header>
       <List animated verticalAlign="middle" size="huge">
         {users.map((user, i) => (
           <User userName={user.userName} key={i} onDeleteUser={onDeleteUser} />
