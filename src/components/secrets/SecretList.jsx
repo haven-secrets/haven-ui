@@ -8,7 +8,9 @@ const SecretList = () => {
   return (
     <div>
       <Grid centered columns="equal">
-        {secretNames.map((secretName) => <Secret secretName={secretName} />)}
+        {secretNames.map((secretName, i) => (
+          <Secret secretName={secretName} key={i} />
+        ))}
       </Grid>
       <Button>
         <Icon name="add" />

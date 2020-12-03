@@ -3,22 +3,27 @@ import { Link } from "react-router-dom";
 
 function SelectEnvironment({ match }) {
   const projectName = match.params.project;
-  const ENVIRONMENTS = ["Development", "Production", "Staging"]; // TEMPORARY
+  const ENVIRONMENTS = ["Development", "Production", "Staging"];
 
   return (
     <div
-      class="indentedList"
       style={{
         marginTop: "12em",
       }}
     >
       <Header size="huge">{projectName}</Header>
-      <Header size="medium">Select An Environment:</Header>
-      <List link>
-        {ENVIRONMENTS.map((environment) => {
+      <Header size="large">Select An Environment:</Header>
+      <List selection link animated size="huge">
+        {ENVIRONMENTS.map((environment, i) => {
           return (
-            <List.Item>
-              <Link to={`/${projectName}/${environment}`}>{environment}</Link>
+            <List.Item key={i}>
+              <List.Icon name="cogs" />
+              <List.Content
+                as={Link}
+                to={`/projects/${projectName}/${environment}`}
+              >
+                {environment}
+              </List.Content>
             </List.Item>
           );
         })}
