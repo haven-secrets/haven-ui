@@ -3,10 +3,17 @@ import { Header, Divider } from "semantic-ui-react";
 import SecretList from "../secrets/SecretList";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
 
-const Project = ({ match }) => {
-  const projectName = match.params.project;
-  const environment = match.params.environment;
-
+const Project = (props) => {
+  const projectName = props.match.params.project;
+  const environment = props.match.params.environment;
+  if (!props.projectsInfo || props.projectsInfo.length === 0) {
+    props.fetchProjectsInfo();
+  }
+  const permissions = props.projectsInfo.find(
+    (project) => project.projectName === projectName
+  )?.environments[environment];
+  if (!permissions) return "";
+  
   return (
     <div
       style={{
@@ -17,7 +24,7 @@ const Project = ({ match }) => {
       <Header size="medium" style={{ marginBottom: "2em" }}>
         {environment}
       </Header>
-      <SecretList />
+      <SecretList permissions={permissions} />
       <Divider />
       <PermittedUserListContainer
         projectName={projectName}
