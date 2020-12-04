@@ -8,7 +8,7 @@ import store from "./store";
 import UserDashboard from "./components/users/UserDashboard";
 import Nav from "./components/common/Nav";
 
-import SelectEnvironment from "./components/SelectEnvironment";
+import SelectEnvironmentContainer from "./components/environments/SelectEnvironmentContainer";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
 import "semantic-ui-css/semantic.min.css";
 import Project from "./components/projects/Project";
@@ -26,7 +26,7 @@ function App() {
             <Route path="/users" exact render={UserDashboard} />
             <Route path="/logs" exact component={LogsDashboardContainer} />
             <Route path="/projects/:project/:environment" render={Project} />
-            <Route path="/projects/:project" render={SelectEnvironment} />
+            <Route path="/projects/:project" component={SelectEnvironmentContainer} />
           </Switch>
         </Router>
       </Provider>
