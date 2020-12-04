@@ -8,6 +8,5 @@ export const groupsForUsers = [
   "HavenSecretsTest1StgWriteGroup",
   "HavenSecretsTest2DevReadGroup",
   "HavenSecretsTest2ProdReadGroup",
-  "HavenSecretsTest2StgReadGroup",
   "HavenSecretsTest2DevWriteGroup",
 ];

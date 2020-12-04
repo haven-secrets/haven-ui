@@ -1,14 +1,14 @@
 import React from "react";
-import SelectProject from "./SelectProject";
+import SelectEnvironment from "./SelectEnvironment";
 import { connect } from "react-redux";
 import { groupsForUsers } from "../../data/groupsForUsers.js";
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
 
-const projectsInfo = distillProjectsInfoFromGroups(groupsForUsers);
+const projectInfo = distillProjectsInfoFromGroups(groupsForUsers);
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.projectsInfo.map(projectInfo => projectInfo.projectName),
+    projectsInfo: state.projectsInfo,
   };
 };
 
@@ -17,10 +17,10 @@ const mapDispatchToProps = (dispatch) => {
     fetchProjectsInfo: () => {
       dispatch({
         type: "GET_ALL_PROJECTS_INFO",
-        payload: projectsInfo,
+        payload: projectInfo,
       });
     },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectProject);
+export default connect(mapStateToProps, mapDispatchToProps)(SelectEnvironment);
