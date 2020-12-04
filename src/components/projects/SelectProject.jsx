@@ -12,12 +12,12 @@ function SelectProject(props) {
       <Header size="huge">Projects</Header>
       <Header size="large">Select A Project:</Header>
       <List selection link animated size="huge">
-        {props.projectsInfo.map((projectInfo) => {
+        {props.projects.map((project) => {
           return (
-            <List.Item key={projectInfo.projectName}>
+            <List.Item key={project}>
               <List.Icon name="cubes" />
-              <List.Content as={Link} to={`/projects/${projectInfo.projectName}`}>
-                {projectInfo.projectName}
+              <List.Content as={Link} to={`/projects/${project}`}>
+                {project}
               </List.Content>
             </List.Item>
           );
