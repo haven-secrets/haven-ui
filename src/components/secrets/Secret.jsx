@@ -1,13 +1,20 @@
 import React from "react";
 import { Grid, Segment, Icon, Button } from "semantic-ui-react";
-
 const isFlagged = (secretName) => {
   // TODO: flagged will just be a property on the secret
   return secretName === "baz" || secretName === "qux";
-}
+};
 
-const Secret = ({ secretName }) => {
-  return (    
+const Secret = ({ secretName, permissions }) => {
+  const editButton = () => {
+    return (
+      <Button color={isFlagged(secretName) ? "red" : null}>
+        <Icon name="save" />
+      </Button>
+    );
+  };
+
+  return (
     <Grid.Row>
       <Grid.Column width={3}>
         <Segment color={isFlagged(secretName) ? "red" : null}>
@@ -16,11 +23,11 @@ const Secret = ({ secretName }) => {
         </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Segment color={isFlagged(secretName) ? "red" : null}>{("●").repeat(20)}</Segment>
+        <Segment color={isFlagged(secretName) ? "red" : null}>
+          {"●".repeat(20)}
+        </Segment>
       </Grid.Column>
-      <Button color={isFlagged(secretName) ? "red" : null}>
-        <Icon name="save" />
-      </Button>
+      {permissions.includes("Write") ? editButton() : ""}
     </Grid.Row>
   );
 };
