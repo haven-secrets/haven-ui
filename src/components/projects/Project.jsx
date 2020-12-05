@@ -1,6 +1,6 @@
 // import React from "react";
 import { Header, Divider } from "semantic-ui-react";
-import SecretList from "../secrets/SecretList";
+import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
 
 const Project = (props) => {
@@ -13,7 +13,7 @@ const Project = (props) => {
     (project) => project.projectName === projectName
   )?.environments[environment];
   if (!permissions) return "";
-  
+
   return (
     <div
       style={{
@@ -24,7 +24,7 @@ const Project = (props) => {
       <Header size="medium" style={{ marginBottom: "2em" }}>
         {environment}
       </Header>
-      <SecretList permissions={permissions} />
+      <SecretListContainer projectName={projectName} environment={environment} permissions={permissions} />
       <Divider />
       <PermittedUserListContainer
         projectName={projectName}
