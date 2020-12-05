@@ -2,7 +2,6 @@ import { List, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 function SelectProject(props) {
-  props.fetchProjectsInfo()
   return (
     <div
       style={{

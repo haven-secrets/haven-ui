@@ -6,8 +6,14 @@ class NewProjectForm extends React.Component {
     name: "",
   };
 
-  onSubmitNewUser = (e) => {
-    this.props.onSubmit(this.state.name);
+  onCreateProject = (e) => {
+    // TODO: make AWS call here
+    if (
+      this.state.name.trim().length === 0 ||
+      this.props.projects.includes(this.state.name.trim())
+    ) {
+    } else this.props.createNewProject(this.state.name.trim());
+
     this.setState({ name: "" });
   };
 
@@ -26,7 +32,7 @@ class NewProjectForm extends React.Component {
             onChange={this.onInputChange}
             value={this.state.name}
           />
-          <Button type="submit" onClick={this.onSubmitNewUser}>
+          <Button type="submit" onClick={this.onCreateProject}>
             Create Project
           </Button>
         </Form>
