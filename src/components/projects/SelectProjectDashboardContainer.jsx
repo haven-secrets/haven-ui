@@ -1,14 +1,15 @@
 import React from "react";
-import SelectProject from "./SelectProject";
+import SelectProjectDashboard from "./SelectProjectDashboard";
 import { connect } from "react-redux";
 import { groupsForUsers } from "../../data/groupsForUsers.js";
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
+import createProjectObject from "../../utils/createProjectObject";
 
 const projectsInfo = distillProjectsInfoFromGroups(groupsForUsers);
 
 const mapStateToProps = (state) => {
   return {
-    projects: state.projectsInfo.map(projectInfo => projectInfo.projectName),
+    projectsInfo: state.projectsInfo,
   };
 };
 
@@ -20,7 +21,17 @@ const mapDispatchToProps = (dispatch) => {
         payload: projectsInfo,
       });
     },
+    createNewProject: (projectName) => {
+      const projectObject = createProjectObject(projectName);
+      dispatch({
+        type: "CREATE_NEW_PROJECT",
+        payload: projectObject,
+      });
+    },
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectProject);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectProjectDashboard);
