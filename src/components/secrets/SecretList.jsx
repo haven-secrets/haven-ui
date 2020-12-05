@@ -2,14 +2,29 @@ import React from "react";
 import { Grid, Button, Icon } from "semantic-ui-react";
 import Secret from "./Secret";
 
-const SecretList = ({ permissions }) => {
-  const secretNames = ["foo", "bar", "baz", "qux"];
+const SecretList = (props) => {
+  const projectSecrets = props.secrets[props.projectName + props.environment];
+
+  if (!projectSecrets) {
+    props.fetchProjectsEnvSecrets();
+    return "";
+  }
+
+  console.log(projectSecrets);
 
   return (
     <div>
       <Grid centered columns="equal">
-        {secretNames.map((secretName, i) => (
-          <Secret secretName={secretName} permissions={permissions} key={i} />
+        {projectSecrets.map((secret) => (
+          <Secret
+            secretName={secret.SecretName}
+            permissions={props.permissions}
+            secretValue={secret.SecretValue}
+            flagged={secret.Flagged === "true"}
+            version={secret.Version}
+            key={secret.SecretName}
+            saveNewSecretVersion={props.saveNewSecretVersion}
+          />
         ))}
       </Grid>
       <Button>
