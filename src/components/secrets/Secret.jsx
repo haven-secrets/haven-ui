@@ -79,10 +79,10 @@ const Secret = ({
     if (editingSecret) {
       return (
         <>
-          <Button color={flagged ? "red" : null} onClick={saveNewSecretValue}>
+          <Button color="green" onClick={saveNewSecretValue}>
             <Icon name="save" />
           </Button>
-          <Button color={flagged ? "red" : null} onClick={editSecret}>
+          <Button color="blue" onClick={editSecret}>
             <Icon name="cancel" />
           </Button>
         </>
