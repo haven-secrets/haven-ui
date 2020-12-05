@@ -1,18 +1,19 @@
 export default function secrets(state = {}, action) {
+  const key = action.payload?.projectName + action.payload?.environment;
   switch (action.type) {
     case "GET_ALL_PROJECT_SECRETS":
-      const allKey = action.payload.projectName + action.payload.environment;
-      state[allKey] = action.payload.secrets;
+      state[key] = action.payload.secrets;
       return Object.assign({}, state);
     case "SAVE_NEW_SECRET_VERSION":
-      const versionKey =
-        action.payload.projectName + action.payload.environment;
-      state[versionKey] = state[versionKey].map((secret) => {
+      state[key] = state[key].map((secret) => {
         if (secret.SecretName !== action.payload.secrets.SecretName) {
-          return secret
+          return secret;
         }
-        return action.payload.secrets
+        return action.payload.secrets;
       });
+      return Object.assign({}, state);
+    case "PUT_SECRET":
+      state[key].push(action.payload.secrets)
       return Object.assign({}, state);
     default:
       return state;

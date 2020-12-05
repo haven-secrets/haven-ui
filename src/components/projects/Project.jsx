@@ -25,7 +25,6 @@ const Project = (props) => {
         {environment}
       </Header>
       <SecretListContainer projectName={projectName} environment={environment} permissions={permissions} />
-      <Divider />
       <PermittedUserListContainer
         projectName={projectName}
         environment={environment}

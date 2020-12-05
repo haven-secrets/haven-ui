@@ -23,12 +23,19 @@ const mapDispatchToProps = (dispatch, { projectName, environment }) => {
       });
     },
     saveNewSecretVersion: (secret) => {
-      const newProjectEnvSecrets = addAdditionalSecretData(secret, projectEnv)
+      const newProjectEnvSecrets = addAdditionalSecretData(secret, projectEnv);
       dispatch({
         type: "SAVE_NEW_SECRET_VERSION",
         payload: newProjectEnvSecrets,
-      })
-    }
+      });
+    },
+    putSecret: (secret) => {
+      const newProjectEnvSecrets = addAdditionalSecretData(secret, projectEnv);
+      dispatch({
+        type: "PUT_SECRET",
+        payload: newProjectEnvSecrets,
+      });
+    },
   };
 };
 
