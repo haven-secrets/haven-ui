@@ -5,7 +5,7 @@ const mapStateToProps = (state, ownProps) => {
   const project = `${ownProps.projectName}/${ownProps.environment}`;
   const permittedUsers = [];
   const disallowedUsers = [];
-  console.log(state.users);
+
   state.users.forEach((user) => {
     if (
       user.groups.includes(`${project}/Write`) &&
@@ -50,6 +50,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         payload: { userName, groupNames },
       });
     },
+    removePermissions: (userName) => {
+      dispatch({
+        type: "REMOVE_USER_PERMISSION",
+        payload: { userName, project }
+      })
+    }
   };
 };
 

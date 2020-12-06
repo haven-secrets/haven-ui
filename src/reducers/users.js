@@ -15,6 +15,15 @@ export default function users(state = usersData, action) {
         }
         return user;
       });
+    case "REMOVE_USER_PERMISSION":
+      return state.map((user) => {
+        if (user.userName === action.payload.userName) {
+          user.groups = user.groups.filter((group) =>
+            !group.startsWith(action.payload.project)
+          );
+        }
+        return user;
+      });
     default:
       return state;
   }
