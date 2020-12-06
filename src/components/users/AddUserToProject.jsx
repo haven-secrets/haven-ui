@@ -21,7 +21,6 @@ const AddUserToProject = (props) => {
       setSelectedUser(value);
     }
   };
-  // console.log(props);
 
   const grantUserAccess = () => {
     if (selectedUser) {
