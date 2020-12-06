@@ -3,7 +3,7 @@ import { Select, Button, Icon, Dropdown, Divider } from "semantic-ui-react";
 
 const AddUserToProject = (props) => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [selectedPermissions, setSelecetdPermissions] = useState("Read");
+  const [selectedPermissions, setSelecetdPermissions] = useState(["Read"]);
   const options = [
     { key: "Read", text: "Read", value: ["Read"] },
     { key: "Write", text: "Write", value: ["Write"] },
