@@ -5,7 +5,7 @@ import { Container } from "semantic-ui-react";
 
 import store from "./store";
 
-import UserDashboard from "./components/users/UserDashboard";
+import UserDashboardContainer from "./components/users/UserDashboardContainer";
 import Nav from "./components/common/Nav";
 
 import SelectEnvironmentContainer from "./components/environments/SelectEnvironmentContainer";
@@ -27,7 +27,7 @@ function App() {
               exact
               component={SelectProjectDashboardContainer}
             />
-            <Route path="/users" exact render={UserDashboard} />
+            <Route path="/users" exact component={UserDashboardContainer} />
             <Route path="/logs" exact component={LogsDashboardContainer} />
             <Route
               path="/projects/:project/:environment"

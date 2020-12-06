@@ -12,7 +12,10 @@ const PermittedUserList = (props) => {
           <PermittedUser user={user} key={i} />
         ))}
       </List>
-      <AddUserToProject users={props.disallowedUsers} />
+      <AddUserToProject
+        addUserPermission={props.addUserToProject}
+        users={props.disallowedUsers}
+      />
     </div>
   );
 };

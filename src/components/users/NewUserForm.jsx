@@ -7,7 +7,9 @@ class NewUserForm extends React.Component {
   };
 
   onSubmitNewUser = (e) => {
-    this.props.onSubmit(this.state.name);
+    const users = this.props.users.map((user) => user.userName);
+    if (this.state.name.trim() && !users.includes(this.state.name.trim()))
+      this.props.addNewUser(this.state.name);
     this.setState({ name: "" });
   };
 
