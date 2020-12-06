@@ -5,6 +5,7 @@ const mapStateToProps = (state, ownProps) => {
   const project = `${ownProps.projectName}/${ownProps.environment}`;
   const permittedUsers = [];
   const disallowedUsers = [];
+  console.log(state.users);
   state.users.forEach((user) => {
     if (
       user.groups.includes(`${project}/Write`) &&
@@ -35,13 +36,19 @@ const mapStateToProps = (state, ownProps) => {
   return {
     permittedUsers,
     disallowedUsers,
+    project,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
+  const project = `${ownProps.projectName}/${ownProps.environment}`;
   return {
-    onSubmit: (newName) => {
-      dispatch({ type: "CREATE_USER_SUCCESS", payload: newName });
+    addUserToProject: (userName, groups) => {
+      const groupNames = groups.map((group) => `${project}/${group}`);
+      dispatch({
+        type: "ADD_USER_PERMISSION",
+        payload: { userName, groupNames },
+      });
     },
   };
 };

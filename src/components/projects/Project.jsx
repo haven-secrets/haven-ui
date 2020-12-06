@@ -24,10 +24,15 @@ const Project = (props) => {
       <Header size="medium" style={{ marginBottom: "2em" }}>
         {environment}
       </Header>
-      <SecretListContainer projectName={projectName} environment={environment} permissions={permissions} />
+      <SecretListContainer
+        projectName={projectName}
+        environment={environment}
+        permissions={permissions}
+      />
       <PermittedUserListContainer
         projectName={projectName}
         environment={environment}
+        users={props.users}
       />
     </div>
   );
