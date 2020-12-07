@@ -24,6 +24,13 @@ export default function users(state = usersData, action) {
         }
         return user;
       });
+    case "DELETE_PROJECT":
+      return state.map((user) => {
+        user.groups = user.groups.filter((group) => {
+          return !group.startsWith(action.payload);
+        });
+        return user;
+      });
     default:
       return state;
   }
