@@ -4,9 +4,6 @@ import NewProjectForm from "./NewProjectForm";
 import { Segment } from "semantic-ui-react";
 
 const SelectProjectDashboard = (props) => {
-  if (!props.projectsInfo || props.projectsInfo.length === 0) {
-    props.fetchProjectsInfo();
-  }
   const projects = props.projectsInfo.map((project) => project.projectName);
   return (
     <div
@@ -17,6 +14,7 @@ const SelectProjectDashboard = (props) => {
       <SelectProject
         fetchProjectsInfo={props.fetchProjectsInfo}
         projects={projects}
+        deleteProject={props.deleteProject}
       />
       <Segment>
         <NewProjectForm

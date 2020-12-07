@@ -1,4 +1,4 @@
-import { List, Header } from "semantic-ui-react";
+import { List, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 function SelectProject(props) {
@@ -14,6 +14,11 @@ function SelectProject(props) {
         {props.projects.map((project) => {
           return (
             <List.Item key={project}>
+              <List.Content floated="right">
+                <Button color="red" onClick={() => props.deleteProject(project)}>
+                  Delete
+                </Button>
+              </List.Content>
               <List.Icon name="cubes" />
               <List.Content as={Link} to={`/projects/${project}`}>
                 {project}

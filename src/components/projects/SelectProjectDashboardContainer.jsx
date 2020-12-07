@@ -15,18 +15,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProjectsInfo: () => {
-      dispatch({
-        type: "GET_ALL_PROJECTS_INFO",
-        payload: projectsInfo,
-      });
-    },
     createNewProject: (projectName) => {
       const projectObject = createProjectObject(projectName);
       dispatch({
         type: "CREATE_NEW_PROJECT",
         payload: projectObject,
       });
+    },
+    deleteProject: (projectName) => {
+      dispatch({ type: "DELETE_PROJECT", payload: projectName });
     },
   };
 };
