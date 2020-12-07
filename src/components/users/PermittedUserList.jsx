@@ -9,7 +9,12 @@ const PermittedUserList = (props) => {
       <Header size="large">Access</Header>
       <List celled animated verticalAlign="middle" size="large">
         {props.permittedUsers.map((user, i) => (
-          <PermittedUser removePermissions={props.removePermissions} user={user} key={i} />
+          <PermittedUser
+            editPermissions={props.editPermissions}
+            removePermissions={props.removePermissions}
+            user={user}
+            key={i}
+          />
         ))}
       </List>
       <AddUserToProject
