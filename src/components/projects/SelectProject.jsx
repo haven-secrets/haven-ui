@@ -2,6 +2,15 @@ import { List, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 function SelectProject(props) {
+  const adminOnly = (project) => (
+    <>
+      <List.Content floated="right">
+        <Button color="red" onClick={() => props.deleteProject(project)}>
+          Delete
+        </Button>
+      </List.Content>
+    </>
+  )
   return (
     <div
       style={{
@@ -14,11 +23,7 @@ function SelectProject(props) {
         {props.projects.map((project) => {
           return (
             <List.Item key={project}>
-              <List.Content floated="right">
-                <Button color="red" onClick={() => props.deleteProject(project)}>
-                  Delete
-                </Button>
-              </List.Content>
+              {props.role === "admin" ? adminOnly(project) : ""}
               <List.Icon name="cubes" />
               <List.Content as={Link} to={`/projects/${project}`}>
                 {project}
