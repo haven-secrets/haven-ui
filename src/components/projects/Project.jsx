@@ -2,7 +2,7 @@
 import { Header, Divider } from "semantic-ui-react";
 import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
-
+import { role } from "../../utils/role"
 const Project = (props) => {
   const projectName = props.match.params.project;
   const environment = props.match.params.environment;
@@ -13,7 +13,15 @@ const Project = (props) => {
     (project) => project.projectName === projectName
   )?.environments[environment];
   if (!permissions) return "";
-
+  const adminOnly = () => (
+    <>
+      <PermittedUserListContainer
+        projectName={projectName}
+        environment={environment}
+        users={props.users}
+      />
+    </>
+  )
   return (
     <div
       style={{
@@ -29,11 +37,7 @@ const Project = (props) => {
         environment={environment}
         permissions={permissions}
       />
-      <PermittedUserListContainer
-        projectName={projectName}
-        environment={environment}
-        users={props.users}
-      />
+      {role === "admin" ? adminOnly() : ""}
     </div>
   );
 };

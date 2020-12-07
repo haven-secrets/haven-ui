@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Grid, Button, Icon, Divider, Input } from "semantic-ui-react";
 import Secret from "./Secret";
-
+import { role } from "../../utils/role"
 const SecretList = (props) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
@@ -12,6 +12,17 @@ const SecretList = (props) => {
     if (e.target.id === "secretName") setNewSecretName(value);
     else setNewSecretValue(value);
   };
+
+  const adminOnly = () => (
+    <>
+      <Button onClick={toggleAddSecretForm}>
+        <Icon name={addSecretFormOpen ? "cancel" : "add"} />
+        {addSecretFormOpen ? "Cancel" : "Add Secret"}
+      </Button>
+      <Divider />
+      {addSecretFormOpen ? displayAddSecretForm() : ""}
+    </>
+  )
 
   const handleSubmit = () => {
     toggleAddSecretForm()
@@ -80,12 +91,7 @@ const SecretList = (props) => {
         ))}
       </Grid>
       <Divider />
-      <Button onClick={toggleAddSecretForm}>
-        <Icon name={addSecretFormOpen ? "cancel" : "add"} />
-        {addSecretFormOpen ? "Cancel" : "Add Secret"}
-      </Button>
-      <Divider />
-      {addSecretFormOpen ? displayAddSecretForm() : ""}
+      {role === "admin" ? adminOnly() : ""}
     </div>
   );
 };

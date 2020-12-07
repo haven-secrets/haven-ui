@@ -1,7 +1,28 @@
 import { Menu, Container, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import { role } from "../../utils/role";
 
 function Nav() {
+  const adminRoutes = () => (
+    <>
+      <Menu.Item
+        as={NavLink}
+        to="/users"
+        name="Users"
+        style={{
+          fontSize: "2.1em",
+        }}
+      />
+      <Menu.Item
+        as={NavLink}
+        to="/logs"
+        name="Logs"
+        style={{
+          fontSize: "2.1em",
+        }}
+      />
+    </>
+  );
   return (
     <Menu fixed="top" borderless inverted widths={5}>
       <Container>
@@ -30,22 +51,7 @@ function Nav() {
             fontSize: "2.1em",
           }}
         />
-        <Menu.Item
-          as={NavLink}
-          to="/users"
-          name="Users"
-          style={{
-            fontSize: "2.1em",
-          }}
-        />
-        <Menu.Item
-          as={NavLink}
-          to="/logs"
-          name="Logs"
-          style={{
-            fontSize: "2.1em",
-          }}
-        />
+        {role === "admin" ? adminRoutes() : ""}
       </Container>
     </Menu>
   );
