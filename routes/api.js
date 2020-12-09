@@ -1,8 +1,10 @@
-const express = require("express");
-const router = express.Router();
+import express from "express"
+export const router = express.Router();
+import * as haven from "lockit-secrets-test3"
 
-router.get("/hello", (req, res, next) => {
-  res.send({ express: "Hello From Haven" }).catch(next);
+
+router.get("/getAllUsers", (req, res, next) => {
+  haven.getAllHavenUsers().then(data => res.json(data))
 });
 
 router.post("/data", (req, res) => {
@@ -13,5 +15,3 @@ router.post("/data", (req, res) => {
     )}`
   );
 });
-
-module.exports = router;

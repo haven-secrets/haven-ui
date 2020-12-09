@@ -11,6 +11,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    fetchAllUsers: (users) => {
+      fetch("http://localhost:5000/api/getAllUsers")
+        .then((res) => res.json())
+        .then((data) => dispatch({ type: "FETCH_ALL_USERS", payload: data }));
+    },
     onDeleteUser: (userName) => {
       dispatch({ type: "DELETE_USER_SUCCESS", payload: userName });
     },
