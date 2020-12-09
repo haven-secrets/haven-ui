@@ -2,9 +2,11 @@ import React from "react";
 import SecretList from "./SecretList";
 import { connect } from "react-redux";
 import { secrets } from "../../data/secrets.js";
+import axios from "axios";
 
-const addAdditionalSecretData = (array, object) =>
+const addAdditionalSecretData = (array, object) => {
   Object.assign({}, object, { secrets: array });
+};
 
 const mapStateToProps = (state, { projectName, environment }) => {
   return {
@@ -16,24 +18,64 @@ const mapDispatchToProps = (dispatch, { projectName, environment }) => {
   const projectEnv = { projectName, environment };
   return {
     fetchProjectsEnvSecrets: () => {
-      const projectEnvSecrets = addAdditionalSecretData(secrets, projectEnv);
-      dispatch({
-        type: "GET_ALL_PROJECT_SECRETS",
-        payload: projectEnvSecrets,
+      axios
+        .get(
+          `http://localhost:5000/api/listSecretsForProjectEnv?project=${projectName}&environment=${environment}`
+        )
+        .then((res) => {
+          const projectEnvSecrets = res.data;
+          dispatch({
+            type: "GET_ALL_PROJECT_SECRETS",
+            payload: { projectName, environment, secrets: projectEnvSecrets },
+          });
+        });
+    },
+
+    saveNewSecretVersion: ({ SecretName, SecretValue, Flagged, Version }) => {
+      const payload = {
+        Project: projectName,
+        Environment: environment,
+        SecretName,
+        SecretValue,
+      };
+
+      axios.post("http://localhost:5000/api/secrets", payload).then((res) => {
+        const projectEnvSecrets = res.data;
+        dispatch({
+          type: "SAVE_NEW_SECRET_VERSION",
+          payload: {
+            ProjectName: projectName,
+            Environment: environment,
+            SecretName,
+            SecretValue,
+            Flagged,
+            Version,
+          },
+        });
       });
     },
-    saveNewSecretVersion: (secret) => {
-      const newProjectEnvSecrets = addAdditionalSecretData(secret, projectEnv);
-      dispatch({
-        type: "SAVE_NEW_SECRET_VERSION",
-        payload: newProjectEnvSecrets,
-      });
-    },
-    putSecret: (secret) => {
-      const newProjectEnvSecrets = addAdditionalSecretData(secret, projectEnv);
-      dispatch({
-        type: "PUT_SECRET",
-        payload: newProjectEnvSecrets,
+
+    putSecret: ({ SecretName, SecretValue, Flagged, Version }) => {
+      const payload = {
+        Project: projectName,
+        Environment: environment,
+        SecretName,
+        SecretValue,
+      };
+
+      axios.post("http://localhost:5000/api/secrets", payload).then((res) => {
+        const projectEnvSecrets = res.data;
+        dispatch({
+          type: "PUT_SECRET",
+          payload: {
+            ProjectName: projectName,
+            Environment: environment,
+            SecretName,
+            SecretValue,
+            Flagged,
+            Version,
+          },
+        });
       });
     },
   };
