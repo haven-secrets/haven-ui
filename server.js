@@ -1,6 +1,6 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const apiRoutes = require("./routes/api");
+import express from 'express';
+import bodyParser from 'body-parser';
+import {router} from "./routes/api.js";
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -15,11 +15,11 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-app.use("/api", apiRoutes);
-//
-// app.use((err, req, res, next) => {
-//   console.log(err);
-//   next();
-// });
+app.use("/api", router);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  next();
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
