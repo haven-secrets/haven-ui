@@ -1,11 +1,10 @@
 import React from "react";
-import SelectProjectDashboard from "./SelectProjectDashboard";
 import { connect } from "react-redux";
-import { groupsForUsers } from "../../data/groupsForUsers.js";
+import axios from "axios";
+import SelectProjectDashboard from "./SelectProjectDashboard";
+
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
 import createProjectObject from "../../utils/createProjectObject";
-
-const projectsInfo = distillProjectsInfoFromGroups(groupsForUsers);
 
 const mapStateToProps = (state) => {
   return {
@@ -15,15 +14,32 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createNewProject: (projectName) => {
-      const projectObject = createProjectObject(projectName);
-      dispatch({
-        type: "CREATE_NEW_PROJECT",
-        payload: projectObject,
+    getAllProjectInfo: () => {
+      axios.get("http://localhost:5000/api/listGroupsForUser").then((res) => {
+        const projectInfo = distillProjectsInfoFromGroups(res.data);
+        dispatch({
+          type: "GET_ALL_PROJECTS_INFO",
+          payload: projectInfo,
+        });
       });
     },
+    createNewProject: (projectName) => {
+      axios
+        .post("http://localhost:5000/api/projects/" + projectName)
+        .then(() => {
+          const projectObject = createProjectObject(projectName);
+          dispatch({
+            type: "CREATE_NEW_PROJECT",
+            payload: projectObject,
+          });
+        });
+    },
     deleteProject: (projectName) => {
-      dispatch({ type: "DELETE_PROJECT", payload: projectName });
+      axios
+        .delete("http://localhost:5000/api/projects/" + projectName)
+        .then(() => {
+          dispatch({ type: "DELETE_PROJECT", payload: projectName });
+        });
     },
   };
 };

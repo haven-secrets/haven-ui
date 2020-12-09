@@ -42,10 +42,10 @@ class LogsDashboard extends React.Component {
     const environments = [];
 
     this.props.logs.forEach((log) => {
-      if (!projects.includes(log["Project"].S)) projects.push(log["Project"].S);
-      if (!users.includes(log["UserName"].S)) users.push(log["UserName"].S);
-      if (!environments.includes(log["Environment"].S))
-        environments.push(log["Environment"].S);
+      if (!projects.includes(log["Project"])) projects.push(log["Project"]);
+      if (!users.includes(log["UserName"])) users.push(log["UserName"]);
+      if (!environments.includes(log["Environment"]))
+        environments.push(log["Environment"]);
     });
 
     this.setState({
@@ -107,9 +107,9 @@ class LogsDashboard extends React.Component {
       return logs;
     return logs.filter((log) => {
       return (
-        (!project || log["Project"].S === project) &&
-        (!user || log["UserName"].S === user) &&
-        (!environment || log["Environment"].S === environment)
+        (!project || log["Project"] === project) &&
+        (!user || log["UserName"] === user) &&
+        (!environment || log["Environment"] === environment)
       );
     });
   }
