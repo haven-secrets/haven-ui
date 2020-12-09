@@ -11,10 +11,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchLogs: () => {
-      dispatch({
-        type: "GET_ALL_LOGS",
-        payload: logs,
-      });
+      fetch("http://localhost:5000/api/fetchLogs")
+        .then((res) => res.json())
+        .then((data) =>
+          dispatch({
+            type: "GET_ALL_LOGS",
+            payload: data,
+          })
+        );
     },
   };
 };

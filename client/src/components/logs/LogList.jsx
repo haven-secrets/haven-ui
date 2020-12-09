@@ -6,7 +6,7 @@ class LogList extends React.Component {
     return (
       <div>
         {this.props.logs.map((log) => (
-          <Log key={log["PK"].S} log={log} />
+          <Log key={log["PK"]} log={log} />
         ))}
       </div>
     );

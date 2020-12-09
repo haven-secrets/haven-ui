@@ -7,6 +7,10 @@ router.get("/getAllUsers", (req, res, next) => {
   haven.getAllHavenUsers().then(data => res.json(data))
 });
 
+router.get("/fetchLogs", (req, res, next) => {
+  haven.fetchLogs().then(data => res.json(data))
+});
+
 router.post("/data", (req, res) => {
   console.log(req.body);
   res.send(
