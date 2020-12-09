@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SelectProject from "./SelectProject";
 import NewProjectForm from "./NewProjectForm";
 import { Segment } from "semantic-ui-react";
 import { role } from "../../utils/role";
 
 const SelectProjectDashboard = (props) => {
+  useEffect(() => {
+    props.getAllProjectInfo();
+  }, [])
+
   const adminOnly = () => (
     <>
       <Segment>

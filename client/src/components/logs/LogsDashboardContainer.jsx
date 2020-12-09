@@ -1,6 +1,5 @@
 import LogsDashboard from "./LogsDashboard";
 import { connect } from "react-redux";
-import { logs } from "../../data/logs.js";
 
 const mapStateToProps = (state) => {
   return {
