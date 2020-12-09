@@ -4,8 +4,6 @@ import * as haven from "lockit-secrets-test3"
 
 
 router.get("/getAllUsers", (req, res, next) => {
-  // res.json({"omg": "lol  "})
-  // return 'fu'
   haven.getAllHavenUsers().then(data => res.json(data))
 });
 
