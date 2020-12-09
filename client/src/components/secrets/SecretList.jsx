@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Form, Grid, Button, Icon, Divider, Input } from "semantic-ui-react";
 import Secret from "./Secret";
-import { role } from "../../utils/role"
+import { role } from "../../utils/role";
+
 const SecretList = (props) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
@@ -22,20 +23,27 @@ const SecretList = (props) => {
       <Divider />
       {addSecretFormOpen ? displayAddSecretForm() : ""}
     </>
-  )
+  );
 
-  const handleSubmit = () => {
-    toggleAddSecretForm()
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    toggleAddSecretForm();
     if (newSecretName.trim() && newSecretValue.trim()) {
       if (projectSecrets.includes(newSecretName)) {
         // TODO: update secret
       } else {
-        // TODO: push to AWS
-        const SecretName = newSecretName;
-        const SecretValue = newSecretValue;
-        const Version = "1";
-        const Flagged = "false";
-        props.putSecret({ SecretName, SecretValue, Version, Flagged });
+        const secretName = newSecretName;
+        const secretValue = newSecretValue;
+        const version = "1";
+        const flagged = "false";
+        props.putSecret({
+          SecretName: secretName,
+          SecretValue: secretValue,
+          Flagged: flagged,
+          Version: version,
+        });
+        setNewSecretName("");
+        setNewSecretValue("");
       }
     }
   };

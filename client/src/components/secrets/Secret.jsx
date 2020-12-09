@@ -27,7 +27,6 @@ const Secret = ({
       const secretValue = editableSecretValue.trim();
       const nextVersion = String(+version + 1);
       const flagged = false;
-      // TODO: updateAWS here as well (it would just be a putSecret)
       saveNewSecretVersion({
         SecretName: secretName,
         SecretValue: secretValue,
