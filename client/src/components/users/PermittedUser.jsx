@@ -23,7 +23,7 @@ const PermittedUser = ({ user, removePermissions, editPermissions }) => {
   const { open, size } = state;
 
   const handleDelete = () => {
-    removePermissions(user.userName);
+    removePermissions(user.userName, user.read, user.write);
   };
   const handleEdit = () => {
     dispatch({ type: "open", size: "tiny" });

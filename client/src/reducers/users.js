@@ -1,6 +1,4 @@
-import { usersData } from "../data/users.js";
-
-export default function users(state = usersData, action) {
+export default function users(state = [], action) {
   switch (action.type) {
     case "FETCH_ALL_USERS":
       return action.payload;

@@ -2,6 +2,7 @@ import React from "react";
 import { List, Button } from "semantic-ui-react";
 
 const User = (props) => {
+  if (props.userName === "HavenSecretsAdmin") return ""
   return (
     <List.Item>
       <List.Content floated="right">
