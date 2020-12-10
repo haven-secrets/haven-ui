@@ -30,12 +30,28 @@ router.delete("/revokeUserFromGroups/:name", (req, res, next) => {
   res.send({ message: "successfully revoked user permission" });
 });
 
+router.get("/getAllUsers", (req, res, next) => {
+  haven.getAllHavenUsers().then((data) => res.json(data));
+});
+
 router.get("/fetchLogs", (req, res, next) => {
   haven.fetchLogs().then((data) => res.json(data));
 });
 
 router.get("/listGroupsForUser", (req, res, next) => {
   haven.listGroupsForUser().then((data) => res.json(data));
+});
+
+router.get("/listSecretsForProjectEnv", (req, res, next) => {
+  const { project, environment } = req.query;
+  haven.getAllSecrets(project, environment).then((data) => res.json(data));
+});
+
+router.post("/secrets", (req, res, next) => {
+  const { Project, Environment, SecretName, SecretValue } = req.body;
+  haven
+    .putSecret(Project, Environment, SecretName, SecretValue)
+    .then((data) => res.json(data));
 });
 
 router.post("/projects/:name", (req, res, next) => {
