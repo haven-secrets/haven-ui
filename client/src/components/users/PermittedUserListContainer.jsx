@@ -62,32 +62,22 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           })
         );
     },
-    removePermissions: (userName, canRead, canWrite) => {
-      const groups = [];
-      if (canRead)
-        groups.push(
-          `HavenSecrets${ownProps.projectName}${ownProps.environment}ReadGroup`
-        );
-      if (canWrite)
-        groups.push(
-          `HavenSecrets${ownProps.projectName}${ownProps.environment}WriteGroup`
-        );
+    removePermissions: (userName, groups) => {
+      const groupNames = groups.map((group) => `${project}/${group}`);
+      const coreGroupNames = groups.map(
+        (group) =>
+          `HavenSecrets${ownProps.projectName}${ownProps.environment}${group}Group`
+      );
       axios
         .delete("http://localhost:5000/api/revokeUserFromGroups/" + userName, {
-          data: { groups: groups },
+          data: { groups: coreGroupNames },
         })
         .then(() =>
           dispatch({
             type: "REMOVE_USER_PERMISSION",
-            payload: { userName, project },
+            payload: { userName, groupNames },
           })
         );
-    },
-    editPermissions: (userName, canRead, canWrite) => {
-      dispatch({
-        type: "EDIT_USER_PERMISSION",
-        payload: { userName, project, canRead, canWrite },
-      });
     },
   };
 };
