@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Grid, Button, Icon, Divider, Input } from "semantic-ui-react";
 import Secret from "./Secret";
 import { role } from "../../utils/role";
@@ -7,7 +7,6 @@ const SecretList = (props) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
   const [newSecretValue, setNewSecretValue] = useState("");
-  const projectSecrets = props.secrets[props.projectName + props.environment];
   const toggleAddSecretForm = () => setAddSecretFormOpen(!addSecretFormOpen);
   const handleChange = (e, { value }) => {
     if (e.target.id === "secretName") setNewSecretName(value);
@@ -29,7 +28,7 @@ const SecretList = (props) => {
     e.preventDefault();
     toggleAddSecretForm();
     if (newSecretName.trim() && newSecretValue.trim()) {
-      if (projectSecrets.includes(newSecretName)) {
+      if (props.secrets.includes(newSecretName)) {
         // TODO: update secret
       } else {
         const secretName = newSecretName;
@@ -47,12 +46,10 @@ const SecretList = (props) => {
       }
     }
   };
-
-  if (!projectSecrets) {
+  useEffect(() => {
     props.fetchProjectsEnvSecrets();
-    return "";
-  }
-
+  }, []);
+  console.log(props);
   const displayAddSecretForm = () => {
     return (
       <Form size="large">
@@ -86,7 +83,7 @@ const SecretList = (props) => {
   return (
     <div>
       <Grid centered columns="equal">
-        {projectSecrets.map((secret) => (
+        {props.secrets.map((secret) => (
           <Secret
             secretName={secret.SecretName}
             permissions={props.permissions}

@@ -1,8 +1,6 @@
-import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import UserDashboard from "./UserDashboard";
-import { Header, List } from "semantic-ui-react";
 
 const mapStateToProps = (state) => {
   return {

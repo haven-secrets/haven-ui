@@ -1,4 +1,3 @@
-import React from "react";
 import SelectEnvironment from "./SelectEnvironment";
 import { connect } from "react-redux";
 import { groupsForUsers } from "../../data/groupsForUsers.js";
