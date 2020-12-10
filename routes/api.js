@@ -1,6 +1,6 @@
 import express from "express";
 export const router = express.Router();
-import * as haven from "lockit-secrets-test3";
+import * as haven from "haven-secrets-core";
 
 router.get("/users", (req, res, next) => {
   haven.getAllHavenUsersAndGroups().then((data) => res.json(data));
