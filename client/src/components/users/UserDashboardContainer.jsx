@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 import UserDashboard from "./UserDashboard";
 import { Header, List } from "semantic-ui-react";
 
@@ -11,16 +12,26 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAllUsers: (users) => {
-      fetch("http://localhost:5000/api/getAllUsers")
-        .then((res) => res.json())
-        .then((data) => dispatch({ type: "FETCH_ALL_USERS", payload: data }));
+    fetchAllUsers: () => {
+      axios
+        .get("http://localhost:5000/api/users")
+        .then((res) =>
+          dispatch({ type: "FETCH_ALL_USERS", payload: res.data })
+        );
     },
     onDeleteUser: (userName) => {
-      dispatch({ type: "DELETE_USER_SUCCESS", payload: userName });
+      axios
+        .delete("http://localhost:5000/api/users/" + userName)
+        .then(() =>
+          dispatch({ type: "DELETE_USER_SUCCESS", payload: userName })
+        );
     },
     addNewUser: (newName) => {
+      // axios
+      // .post("http://localhost:5000/api/users/" + newName)
+      // .then(() =>
       dispatch({ type: "CREATE_USER_SUCCESS", payload: newName });
+      // );
     },
   };
 };

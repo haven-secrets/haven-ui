@@ -1,13 +1,15 @@
 import { connect } from "react-redux";
+import axios from "axios";
 import PermittedUserList from "./PermittedUserList";
 
 const mapStateToProps = (state, ownProps) => {
   const project = `${ownProps.projectName}/${ownProps.environment}`;
   const permittedUsers = [];
   const disallowedUsers = [];
-  
+
   state.users.forEach((user) => {
-    if (
+    if (user.userName === "HavenSecretsAdmin") {
+    } else if (
       user.groups.includes(`${project}/Write`) &&
       user.groups.includes(`${project}/Read`)
     ) {
@@ -45,23 +47,48 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     addUserToProject: (userName, groups) => {
       const groupNames = groups.map((group) => `${project}/${group}`);
-      dispatch({
-        type: "ADD_USER_PERMISSION",
-        payload: { userName, groupNames },
-      });
+      const coreGroupNames = groups.map(
+        (group) =>
+          `HavenSecrets${ownProps.projectName}${ownProps.environment}${group}Group`
+      );
+      axios
+        .post("http://localhost:5000/api/addUserToProject/" + userName, {
+          data: { groups: coreGroupNames },
+        })
+        .then(() =>
+          dispatch({
+            type: "ADD_USER_PERMISSION",
+            payload: { userName, groupNames },
+          })
+        );
     },
-    removePermissions: (userName) => {
-      dispatch({
-        type: "REMOVE_USER_PERMISSION",
-        payload: { userName, project }
-      })
+    removePermissions: (userName, canRead, canWrite) => {
+      const groups = [];
+      if (canRead)
+        groups.push(
+          `HavenSecrets${ownProps.projectName}${ownProps.environment}ReadGroup`
+        );
+      if (canWrite)
+        groups.push(
+          `HavenSecrets${ownProps.projectName}${ownProps.environment}WriteGroup`
+        );
+      axios
+        .delete("http://localhost:5000/api/revokeUserFromGroups/" + userName, {
+          data: { groups: groups },
+        })
+        .then(() =>
+          dispatch({
+            type: "REMOVE_USER_PERMISSION",
+            payload: { userName, project },
+          })
+        );
     },
     editPermissions: (userName, canRead, canWrite) => {
       dispatch({
         type: "EDIT_USER_PERMISSION",
-        payload: { userName, project, canRead, canWrite }
-      })
-    }
+        payload: { userName, project, canRead, canWrite },
+      });
+    },
   };
 };
 

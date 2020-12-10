@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import User from "./User";
 import NewUserForm from "./NewUserForm";
 import { Segment, Header, List } from "semantic-ui-react";
 
 const UserDashboard = (props) => {
+  useEffect(() => {
+    props.fetchAllUsers();
+  }, []);
+
+  if (props.users?.length === 0) return ""
   return (
     <div
       style={{
