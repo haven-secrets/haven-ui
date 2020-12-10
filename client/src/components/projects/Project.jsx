@@ -1,8 +1,8 @@
 // import React from "react";
-import { Header, Divider } from "semantic-ui-react";
+import { Header } from "semantic-ui-react";
 import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
-import { role } from "../../utils/role"
+import { role } from "../../utils/role";
 const Project = (props) => {
   const projectName = props.match.params.project;
   const environment = props.match.params.environment;
@@ -21,7 +21,7 @@ const Project = (props) => {
         users={props.users}
       />
     </>
-  )
+  );
   return (
     <div
       style={{

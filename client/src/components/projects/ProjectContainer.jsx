@@ -1,4 +1,3 @@
-import React from "react";
 import Project from "./Project";
 import { connect } from "react-redux";
 import { groupsForUsers } from "../../data/groupsForUsers.js";
