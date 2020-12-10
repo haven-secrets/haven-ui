@@ -17,7 +17,7 @@ export default function users(state = [], action) {
       return state.map((user) => {
         if (user.userName === action.payload.userName) {
           user.groups = user.groups.filter((group) => {
-            return !group.startsWith(action.payload.project);
+            return !action.payload.groupNames.includes(group);
           });
         }
         return user;
@@ -27,24 +27,6 @@ export default function users(state = [], action) {
         user.groups = user.groups.filter((group) => {
           return !group.startsWith(action.payload);
         });
-        return user;
-      });
-    case "EDIT_USER_PERMISSION":
-      const { userName, project, canRead, canWrite } = action.payload;
-      const edited = state.map((user) => {
-        if (user.userName === userName) {
-          user.groups = user.groups.filter((group) => {
-            return !(
-              (group === `${project}/Read` && !canRead) ||
-              (group === `${project}/Write` && !canWrite)
-            );
-          });
-          if (canRead && !user.groups.includes(`${project}/Read`)) {
-            user.groups.concat(`${project}/Read`);
-          } else if (canRead && !user.groups.includes(`${project}/Write`)) {
-            user.groups.concat(`${project}/Write`);
-          }
-        }
         return user;
       });
       break;

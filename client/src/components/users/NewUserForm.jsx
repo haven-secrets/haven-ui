@@ -10,12 +10,12 @@ class NewUserForm extends React.Component {
     name: "",
   };
 
-  onSubmitNewUser = (e) => {
+  onSubmitNewUser = async (e) => {
     const users = this.props.users.map((user) => user.userName);
     if (this.state.name.trim() && !users.includes(this.state.name.trim())) {
-      this.props.addNewUser(this.state.name);
+      const tempFile = await this.props.addNewUser(this.state.name);
       fileDownload(
-        JSON.stringify(temporaryUserCredentialsJSON),
+        JSON.stringify(tempFile.data),
         "temporaryUserCredentials.json"
       );
     }

@@ -12,7 +12,7 @@ function editModal(state, action) {
   }
 }
 
-const PermittedUser = ({ user, removePermissions, editPermissions }) => {
+const PermittedUser = ({ user, removePermissions, addPermissions }) => {
   const [readPermissions, setReadPermissions] = useState(user.read);
   const [writePermissions, setWritePermissions] = useState(user.write);
   const [state, dispatch] = useReducer(editModal, {
@@ -23,7 +23,10 @@ const PermittedUser = ({ user, removePermissions, editPermissions }) => {
   const { open, size } = state;
 
   const handleDelete = () => {
-    removePermissions(user.userName, user.read, user.write);
+    const groupsToRemove = [];
+    if (user.read) groupsToRemove.push("Read");
+    if (user.write) groupsToRemove.push("Write");
+    removePermissions(user.userName, groupsToRemove);
   };
   const handleEdit = () => {
     dispatch({ type: "open", size: "tiny" });
@@ -34,10 +37,18 @@ const PermittedUser = ({ user, removePermissions, editPermissions }) => {
     setWritePermissions(user.write);
     dispatch({ type: "close" });
   };
-
+  //
   const handleSubmitEdit = () => {
     dispatch({ type: "close" });
-    editPermissions(user.userName, readPermissions, writePermissions);
+    const groupsToRemove = [];
+    const groupsToAdd = [];
+    if (user.read && !readPermissions) groupsToRemove.push("Read");
+    if (user.write && !writePermissions) groupsToRemove.push("Write");
+    if (!user.read && readPermissions) groupsToAdd.push("Read");
+    if (!user.write && writePermissions) groupsToAdd.push("Write");
+    if (groupsToRemove.length > 0)
+      removePermissions(user.userName, groupsToRemove);
+    if (groupsToAdd.length > 0) addPermissions(user.userName, groupsToAdd);
   };
 
   return (

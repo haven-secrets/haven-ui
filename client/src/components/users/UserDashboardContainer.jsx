@@ -25,11 +25,12 @@ const mapDispatchToProps = (dispatch) => {
         );
     },
     addNewUser: (newName) => {
-      // axios
-      // .post("http://localhost:5000/api/users/" + newName)
-      // .then(() =>
-      dispatch({ type: "CREATE_USER_SUCCESS", payload: newName });
-      // );
+      return axios
+        .post("http://localhost:5000/api/users/" + newName)
+        .then((res) => {
+          dispatch({ type: "CREATE_USER_SUCCESS", payload: newName });
+          return res;
+        });
     },
   };
 };
