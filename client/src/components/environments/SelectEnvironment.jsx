@@ -1,18 +1,16 @@
 import { List, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
 
 function SelectEnvironment(props) {
-  const projectName = props.match.params.project;
-  const ENVIRONMENTS = {Dev: "Development", Prod: "Production", Stg: "Staging"};
-  if (!props.projectsInfo || props.projectsInfo.length === 0) {
-    props.fetchProjectsInfo();
-  }
 
-  const environmentsObject = props.projectsInfo.find(
-    (project) => project.projectName === projectName
-  )?.environments;
-  if (!environmentsObject) return "";
-  const environments = Object.keys(environmentsObject);
+  useEffect(() => {
+    props.getAllProjectInfo();
+  }, [])
+
+  const projectName = props.match.params.project;
+  const environmentMapping = {Dev: "Development", Prod: "Production", Stg: "Staging"};
+  const environments = Object.keys(props.projectEnvironments);
 
   return (
     <div
@@ -31,7 +29,7 @@ function SelectEnvironment(props) {
                 as={Link}
                 to={`/projects/${projectName}/${environment}`}
               >
-                {ENVIRONMENTS[environment]}
+                {environmentMapping[environment]}
               </List.Content>
             </List.Item>
           );

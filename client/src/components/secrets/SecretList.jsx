@@ -28,8 +28,17 @@ const SecretList = (props) => {
     e.preventDefault();
     toggleAddSecretForm();
     if (newSecretName.trim() && newSecretValue.trim()) {
-      if (props.secrets.includes(newSecretName)) {
-        // TODO: update secret
+      const existingSecret =  props.secrets.find((secret) => secret.SecretName === newSecretName)
+      if (existingSecret) {
+        props.saveNewSecretVersion({
+          SecretName: existingSecret.SecretName,
+          SecretValue: newSecretValue,
+          Flagged: false,
+          Version: String(+existingSecret.Version + 1),
+        })
+        setNewSecretName("");
+        setNewSecretValue("");
+
       } else {
         const secretName = newSecretName;
         const secretValue = newSecretValue;
@@ -46,10 +55,11 @@ const SecretList = (props) => {
       }
     }
   };
+
   useEffect(() => {
     props.fetchProjectsEnvSecrets();
   }, []);
-  console.log(props);
+
   const displayAddSecretForm = () => {
     return (
       <Form size="large">

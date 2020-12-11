@@ -1,22 +1,27 @@
 import Project from "./Project";
 import { connect } from "react-redux";
-import { groupsForUsers } from "../../data/groupsForUsers.js";
+import axios from "axios";
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
 
-const projectInfo = distillProjectsInfoFromGroups(groupsForUsers);
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+
+  const selectedProject = state.projectsInfo.find(project => project.projectName === ownProps.match.params.project);
+  const selectedEnvironment = ownProps.match.params.environment
   return {
-    projectsInfo: state.projectsInfo,
+    projectEnvPermissions: selectedProject?.environments?.[selectedEnvironment] || []
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProjectsInfo: () => {
-      dispatch({
-        type: "GET_ALL_PROJECTS_INFO",
-        payload: projectInfo,
+    getAllProjectInfo: () => {
+      axios.get("http://localhost:5000/api/listGroupsForUser").then((res) => {
+        const projectInfo = distillProjectsInfoFromGroups(res.data);
+        dispatch({
+          type: "GET_ALL_PROJECTS_INFO",
+          payload: projectInfo,
+        });
       });
     },
   };

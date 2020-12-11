@@ -1,18 +1,17 @@
-// import React from "react";
+import { useEffect } from "react";
 import { Header } from "semantic-ui-react";
 import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
 import { role } from "../../utils/role";
+
 const Project = (props) => {
+  useEffect(() => {
+    props.getAllProjectInfo();
+  }, [])
+
   const projectName = props.match.params.project;
   const environment = props.match.params.environment;
-  if (!props.projectsInfo || props.projectsInfo.length === 0) {
-    props.fetchProjectsInfo();
-  }
-  const permissions = props.projectsInfo.find(
-    (project) => project.projectName === projectName
-  )?.environments[environment];
-  if (!permissions) return "";
+
   const adminOnly = () => (
     <>
       <PermittedUserListContainer
@@ -22,6 +21,7 @@ const Project = (props) => {
       />
     </>
   );
+
   return (
     <div
       style={{
@@ -35,7 +35,7 @@ const Project = (props) => {
       <SecretListContainer
         projectName={projectName}
         environment={environment}
-        permissions={permissions}
+        permissions={props.projectEnvPermissions}
       />
       {role === "admin" ? adminOnly() : ""}
     </div>
