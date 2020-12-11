@@ -2,10 +2,15 @@ import { List, Header, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 function SelectProject(props) {
+  const onDelete = async (project) => {
+    props.renderLoadingScreen(project, "deleting");
+    await props.deleteProject(project);
+    props.renderLoadingScreen();
+  }
   const adminOnly = (project) => (
     <>
       <List.Content floated="right">
-        <Button color="red" onClick={() => props.deleteProject(project)}>
+        <Button color="red" onClick={() => onDelete(project)}>
           Delete
         </Button>
       </List.Content>
