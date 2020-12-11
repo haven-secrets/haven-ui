@@ -23,21 +23,23 @@ const mapDispatchToProps = (dispatch) => {
       });
     },
     createNewProject: (projectName) => {
-      axios
+      return axios
         .post("http://localhost:5000/api/projects/" + projectName)
-        .then(() => {
+        .then((res) => {
           const projectObject = createProjectObject(projectName);
           dispatch({
             type: "CREATE_NEW_PROJECT",
             payload: projectObject,
           });
+          return res;
         });
     },
     deleteProject: (projectName) => {
-      axios
+      return axios
         .delete("http://localhost:5000/api/projects/" + projectName)
-        .then(() => {
+        .then((res) => {
           dispatch({ type: "DELETE_PROJECT", payload: projectName });
+          return res
         });
     },
   };
