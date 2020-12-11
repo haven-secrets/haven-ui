@@ -29,7 +29,6 @@ export default function users(state = [], action) {
         });
         return user;
       });
-      break;
     default:
       return state;
   }

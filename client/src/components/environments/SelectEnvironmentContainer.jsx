@@ -1,6 +1,5 @@
 import SelectEnvironment from "./SelectEnvironment";
 import { connect } from "react-redux";
-import { groupsForUsers } from "../../data/groupsForUsers.js";
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
 import axios from "axios";
 
