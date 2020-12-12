@@ -1,25 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Header, List } from "semantic-ui-react";
 import PermittedUser from "./PermittedUser";
 import AddUserToProject from "./AddUserToProject";
 
-const PermittedUserList = (props) => {
+const PermittedUserList = ({fetchAllUsers, permittedUsers, removePermissions, addUserToProject, disallowedUsers}) => {
+
+  useEffect(() => {
+    fetchAllUsers();
+  }, [fetchAllUsers]);
+
   return (
     <div>
       <Header size="large">Access</Header>
       <List celled animated verticalAlign="middle" size="large">
-        {props.permittedUsers.map((user, i) => (
+        {permittedUsers.map((user, i) => (
           <PermittedUser
-            removePermissions={props.removePermissions}
-            addPermissions={props.addUserToProject}
+            removePermissions={removePermissions}
+            addPermissions={addUserToProject}
             user={user}
             key={i}
           />
         ))}
       </List>
       <AddUserToProject
-        addUserPermission={props.addUserToProject}
-        users={props.disallowedUsers}
+        addUserPermission={addUserToProject}
+        users={disallowedUsers}
       />
     </div>
   );

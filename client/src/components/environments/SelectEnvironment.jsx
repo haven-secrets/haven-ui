@@ -2,15 +2,15 @@ import { List, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 
-function SelectEnvironment(props) {
+function SelectEnvironment({ getAllProjectInfo, match, projectEnvironments }) {
 
   useEffect(() => {
-    props.getAllProjectInfo();
-  }, [])
+    getAllProjectInfo();
+  }, [getAllProjectInfo])
 
-  const projectName = props.match.params.project;
+  const projectName = match.params.project;
   const environmentMapping = {Dev: "Development", Prod: "Production", Stg: "Staging"};
-  const environments = Object.keys(props.projectEnvironments);
+  const environments = Object.keys(projectEnvironments);
 
   return (
     <div

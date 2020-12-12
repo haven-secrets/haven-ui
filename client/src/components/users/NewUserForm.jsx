@@ -1,9 +1,7 @@
 import React from "react";
 import { Button, Form } from "semantic-ui-react";
 import fileDownload from "js-file-download";
-import * as temporaryUserCredentials from "../../utils/temporaryUserCredentials";
 
-const temporaryUserCredentialsJSON = temporaryUserCredentials.default;
 
 class NewUserForm extends React.Component {
   state = {
@@ -16,7 +14,7 @@ class NewUserForm extends React.Component {
       const tempFile = await this.props.addNewUser(this.state.name);
       fileDownload(
         JSON.stringify(tempFile.data),
-        "temporaryUserCredentials.json"
+        "havenAccountInfo.json"
       );
     }
     this.setState({ name: "" });

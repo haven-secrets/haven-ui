@@ -4,20 +4,20 @@ import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
 import { role } from "../../utils/role";
 
-const Project = (props) => {
+const Project = ({getAllProjectInfo, match, users, projectEnvPermissions}) => {
   useEffect(() => {
-    props.getAllProjectInfo();
-  }, [])
+    getAllProjectInfo();
+  }, [getAllProjectInfo])
 
-  const projectName = props.match.params.project;
-  const environment = props.match.params.environment;
+  const projectName = match.params.project;
+  const environment = match.params.environment;
 
   const adminOnly = () => (
     <>
       <PermittedUserListContainer
         projectName={projectName}
         environment={environment}
-        users={props.users}
+        users={users}
       />
     </>
   );
@@ -35,7 +35,7 @@ const Project = (props) => {
       <SecretListContainer
         projectName={projectName}
         environment={environment}
-        permissions={props.projectEnvPermissions}
+        permissions={projectEnvPermissions}
       />
       {role === "admin" ? adminOnly() : ""}
     </div>

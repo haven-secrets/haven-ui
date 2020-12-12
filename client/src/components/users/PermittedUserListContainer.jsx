@@ -79,6 +79,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
           })
         );
     },
+    fetchAllUsers: () => {
+      axios
+        .get("http://localhost:5000/api/users")
+        .then((res) =>
+          dispatch({ type: "FETCH_ALL_USERS", payload: res.data })
+        );
+    },
   };
 };
 
