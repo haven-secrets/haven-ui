@@ -3,11 +3,16 @@ import { Form, Grid, Button, Icon, Divider, Input } from "semantic-ui-react";
 import Secret from "./Secret";
 import { role } from "../../utils/role";
 
-const SecretList = (props) => {
+const SecretList = ({fetchProjectsEnvSecrets, secrets, saveNewSecretVersion, putSecret, permissions}) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
   const [newSecretValue, setNewSecretValue] = useState("");
   const toggleAddSecretForm = () => setAddSecretFormOpen(!addSecretFormOpen);
+
+  useEffect(() => {
+    fetchProjectsEnvSecrets();
+  },[fetchProjectsEnvSecrets]);
+
   const handleChange = (e, { value }) => {
     if (e.target.id === "secretName") setNewSecretName(value);
     else setNewSecretValue(value);
@@ -28,9 +33,9 @@ const SecretList = (props) => {
     e.preventDefault();
     toggleAddSecretForm();
     if (newSecretName.trim() && newSecretValue.trim()) {
-      const existingSecret =  props.secrets.find((secret) => secret.SecretName === newSecretName)
+      const existingSecret =  secrets.find((secret) => secret.SecretName === newSecretName)
       if (existingSecret) {
-        props.saveNewSecretVersion({
+        saveNewSecretVersion({
           SecretName: existingSecret.SecretName,
           SecretValue: newSecretValue,
           Flagged: false,
@@ -44,7 +49,7 @@ const SecretList = (props) => {
         const secretValue = newSecretValue;
         const version = "1";
         const flagged = "false";
-        props.putSecret({
+        putSecret({
           SecretName: secretName,
           SecretValue: secretValue,
           Flagged: flagged,
@@ -55,10 +60,6 @@ const SecretList = (props) => {
       }
     }
   };
-
-  useEffect(() => {
-    props.fetchProjectsEnvSecrets();
-  }, []);
 
   const displayAddSecretForm = () => {
     return (
@@ -93,15 +94,15 @@ const SecretList = (props) => {
   return (
     <div>
       <Grid centered columns="equal">
-        {props.secrets.map((secret) => (
+        {secrets.map((secret) => (
           <Secret
             secretName={secret.SecretName}
-            permissions={props.permissions}
+            permissions={permissions}
             secretValue={secret.SecretValue}
             flagged={secret.Flagged === "true"}
             version={secret.Version}
             key={secret.SecretName}
-            saveNewSecretVersion={props.saveNewSecretVersion}
+            saveNewSecretVersion={saveNewSecretVersion}
           />
         ))}
       </Grid>

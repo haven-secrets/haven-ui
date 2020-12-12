@@ -4,13 +4,14 @@ import NewProjectForm from "./NewProjectForm";
 import { Segment, Dimmer, Loader } from "semantic-ui-react";
 import { role } from "../../utils/role";
 
-const SelectProjectDashboard = (props) => {
+const SelectProjectDashboard = ({getAllProjectInfo, createNewProject, projectsInfo, deleteProject}) => {
   const [loadingStatus, setLoadingStatus] = useState(false);
   const [loadingAction, setLoadingAction] = useState(null);
   const [loadingProject, setLoadingProject] = useState(null);
+
   useEffect(() => {
-    props.getAllProjectInfo();
-  }, []);
+    getAllProjectInfo();
+  },[getAllProjectInfo]);
 
   const renderLoadingScreen = (project, action) => {
     if (!project && !action) {
@@ -29,14 +30,14 @@ const SelectProjectDashboard = (props) => {
       <Segment>
         <NewProjectForm
           projects={projects}
-          createNewProject={props.createNewProject}
+          createNewProject={createNewProject}
           loadingStatus={loadingStatus}
           renderLoadingScreen={renderLoadingScreen}
         />
       </Segment>
     </>
   );
-  const projects = props.projectsInfo.map((project) => project.projectName);
+  const projects = projectsInfo.map((project) => project.projectName);
   return (
     <div
       style={{
@@ -49,9 +50,8 @@ const SelectProjectDashboard = (props) => {
         </Loader>
       </Dimmer>
       <SelectProject
-        fetchProjectsInfo={props.fetchProjectsInfo}
         projects={projects}
-        deleteProject={props.deleteProject}
+        deleteProject={deleteProject}
         role={role}
         loadingStatus={loadingStatus}
         renderLoadingScreen={renderLoadingScreen}

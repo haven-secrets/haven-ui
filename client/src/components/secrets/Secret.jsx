@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Grid, Segment, Icon, Button, Input } from "semantic-ui-react";
 
 const Secret = ({
@@ -9,13 +9,18 @@ const Secret = ({
   version,
   saveNewSecretVersion,
 }) => {
+
   const [editingSecret, setEditingSecret] = useState(false);
   const [editableSecretValue, setEditableSecretValue] = useState(secretValue);
   const [viewingSecret, setViewingSecret] = useState(false);
-
   const viewSecret = () => setViewingSecret(!viewingSecret);
   const editSecret = () => setEditingSecret(!editingSecret);
   const handleChange = (e, { value }) => setEditableSecretValue(value);
+
+  useEffect(() => {
+    setEditableSecretValue(secretValue)
+  }, [secretValue])
+
   const saveNewSecretValue = (e) => {
     setEditingSecret(false);
     if (
