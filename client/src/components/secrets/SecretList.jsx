@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Form, Grid, Button, Icon, Divider, Input } from "semantic-ui-react";
 import Secret from "./Secret";
-import { role } from "../../utils/role";
 
-const SecretList = ({fetchProjectsEnvSecrets, secrets, saveNewSecretVersion, putSecret, permissions}) => {
+const SecretList = ({
+  fetchProjectsEnvSecrets,
+  secrets,
+  saveNewSecretVersion,
+  putSecret,
+  permissions,
+  role,
+  fetchRole,
+}) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
   const [newSecretValue, setNewSecretValue] = useState("");
@@ -11,7 +18,8 @@ const SecretList = ({fetchProjectsEnvSecrets, secrets, saveNewSecretVersion, put
 
   useEffect(() => {
     fetchProjectsEnvSecrets();
-  },[fetchProjectsEnvSecrets]);
+    fetchRole();
+  }, [fetchProjectsEnvSecrets, fetchRole]);
 
   const handleChange = (e, { value }) => {
     if (e.target.id === "secretName") setNewSecretName(value);
@@ -33,17 +41,18 @@ const SecretList = ({fetchProjectsEnvSecrets, secrets, saveNewSecretVersion, put
     e.preventDefault();
     toggleAddSecretForm();
     if (newSecretName.trim() && newSecretValue.trim()) {
-      const existingSecret =  secrets.find((secret) => secret.SecretName === newSecretName)
+      const existingSecret = secrets.find(
+        (secret) => secret.SecretName === newSecretName
+      );
       if (existingSecret) {
         saveNewSecretVersion({
           SecretName: existingSecret.SecretName,
           SecretValue: newSecretValue,
           Flagged: false,
           Version: String(+existingSecret.Version + 1),
-        })
+        });
         setNewSecretName("");
         setNewSecretValue("");
-
       } else {
         const secretName = newSecretName;
         const secretValue = newSecretValue;
@@ -107,7 +116,7 @@ const SecretList = ({fetchProjectsEnvSecrets, secrets, saveNewSecretVersion, put
         ))}
       </Grid>
       <Divider />
-      {role === "admin" ? adminOnly() : ""}
+      {role === "Admin" ? adminOnly() : ""}
     </div>
   );
 };

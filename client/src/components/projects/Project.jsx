@@ -2,12 +2,19 @@ import { useEffect } from "react";
 import { Header } from "semantic-ui-react";
 import SecretListContainer from "../secrets/SecretListContainer";
 import PermittedUserListContainer from "../users/PermittedUserListContainer";
-import { role } from "../../utils/role";
 
-const Project = ({getAllProjectInfo, match, users, projectEnvPermissions}) => {
+const Project = ({
+  getAllProjectInfo,
+  match,
+  users,
+  projectEnvPermissions,
+  role,
+  fetchRole,
+}) => {
   useEffect(() => {
     getAllProjectInfo();
-  }, [getAllProjectInfo])
+    fetchRole();
+  }, [getAllProjectInfo, fetchRole]);
 
   const projectName = match.params.project;
   const environment = match.params.environment;
@@ -37,7 +44,7 @@ const Project = ({getAllProjectInfo, match, users, projectEnvPermissions}) => {
         environment={environment}
         permissions={projectEnvPermissions}
       />
-      {role === "admin" ? adminOnly() : ""}
+      {role === "Admin" ? adminOnly() : ""}
     </div>
   );
 };

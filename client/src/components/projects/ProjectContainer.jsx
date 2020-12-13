@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import axios from "axios";
 import distillProjectsInfoFromGroups from "../../utils/distillProjectsInfoFromGroups";
 
-
 const mapStateToProps = (state, ownProps) => {
-
-  const selectedProject = state.projectsInfo.find(project => project.projectName === ownProps.match.params.project);
-  const selectedEnvironment = ownProps.match.params.environment
+  const selectedProject = state.projectsInfo.find(
+    (project) => project.projectName === ownProps.match.params.project
+  );
+  const selectedEnvironment = ownProps.match.params.environment;
   return {
-    projectEnvPermissions: selectedProject?.environments?.[selectedEnvironment] || []
+    projectEnvPermissions:
+      selectedProject?.environments?.[selectedEnvironment] || [],
+    role: state.role,
   };
 };
 
@@ -22,6 +24,11 @@ const mapDispatchToProps = (dispatch) => {
           type: "GET_ALL_PROJECTS_INFO",
           payload: projectInfo,
         });
+      });
+    },
+    fetchRole: () => {
+      return axios.get("http://localhost:5000/api/getRole").then((res) => {
+        dispatch({ type: "GET_ROLE", payload: res.data });
       });
     },
   };

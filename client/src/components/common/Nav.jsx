@@ -1,8 +1,7 @@
 import { Menu, Container, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import { role } from "../../utils/role";
 
-function Nav() {
+function Nav({role}) {
   const adminRoutes = () => (
     <>
       <Menu.Item
@@ -51,7 +50,7 @@ function Nav() {
             fontSize: "2.1em",
           }}
         />
-        {role === "admin" ? adminRoutes() : ""}
+        {role === "Admin" ? adminRoutes() : ""}
       </Container>
     </Menu>
   );

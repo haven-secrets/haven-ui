@@ -4,10 +4,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Container } from "semantic-ui-react";
 
 import store from "./store";
-import { role } from "./utils/role";
 
 import UserDashboardContainer from "./components/users/UserDashboardContainer";
-import Nav from "./components/common/Nav";
+import NavContainer from "./components/common/NavContainer";
 
 import SelectEnvironmentContainer from "./components/environments/SelectEnvironmentContainer";
 import LogsDashboardContainer from "./components/logs/LogsDashboardContainer";
@@ -16,17 +15,11 @@ import ProjectContainer from "./components/projects/ProjectContainer";
 import SelectProjectDashboardContainer from "./components/projects/SelectProjectDashboardContainer";
 
 function App() {
-  const adminRoutes = () => (
-    <>
-      <Route path="/users" exact component={UserDashboardContainer} />
-      <Route path="/logs" exact component={LogsDashboardContainer} />
-    </>
-  );
   return (
     <Container textAlign="left">
       <Provider store={store}>
         <Router>
-          <Nav />
+          <NavContainer />
           <Switch>
             <Route path="/" exact component={SelectProjectDashboardContainer} />
             <Route
@@ -42,7 +35,8 @@ function App() {
               path="/projects/:project"
               component={SelectEnvironmentContainer}
             />
-            {role === "admin" ? adminRoutes() : ""}
+            <Route path="/users" exact component={UserDashboardContainer} />
+            <Route path="/logs" exact component={LogsDashboardContainer} />
           </Switch>
         </Router>
       </Provider>
