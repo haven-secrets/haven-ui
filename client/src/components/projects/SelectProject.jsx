@@ -28,7 +28,7 @@ function SelectProject(props) {
         {props.projects.map((project) => {
           return (
             <List.Item key={project}>
-              {props.role === "admin" ? adminOnly(project) : ""}
+              {props.role === "Admin" ? adminOnly(project) : ""}
               <List.Icon name="cubes" />
               <List.Content as={Link} to={`/projects/${project}`}>
                 {project}

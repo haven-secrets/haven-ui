@@ -71,3 +71,8 @@ router.post("/data", (req, res) => {
     )}`
   );
 });
+
+router.get("/getRole", (req, res) => {
+  const info = haven.fetchHavenAccountInfo()
+  res.send(info.role)
+})

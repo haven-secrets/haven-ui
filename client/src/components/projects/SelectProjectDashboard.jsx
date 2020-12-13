@@ -2,16 +2,23 @@ import React, { useEffect, useState } from "react";
 import SelectProject from "./SelectProject";
 import NewProjectForm from "./NewProjectForm";
 import { Segment, Dimmer, Loader } from "semantic-ui-react";
-import { role } from "../../utils/role";
 
-const SelectProjectDashboard = ({getAllProjectInfo, createNewProject, projectsInfo, deleteProject}) => {
+const SelectProjectDashboard = ({
+  getAllProjectInfo,
+  createNewProject,
+  projectsInfo,
+  deleteProject,
+  fetchRole,
+  role,
+}) => {
   const [loadingStatus, setLoadingStatus] = useState(false);
   const [loadingAction, setLoadingAction] = useState(null);
   const [loadingProject, setLoadingProject] = useState(null);
 
   useEffect(() => {
     getAllProjectInfo();
-  },[getAllProjectInfo]);
+    fetchRole();
+  }, [getAllProjectInfo, fetchRole]);
 
   const renderLoadingScreen = (project, action) => {
     if (!project && !action) {
@@ -45,7 +52,8 @@ const SelectProjectDashboard = ({getAllProjectInfo, createNewProject, projectsIn
       }}
     >
       <Dimmer active={loadingStatus} inverted>
-        <Loader size='large' inverted>{`Haven is ${loadingAction} ${loadingProject}. \n
+        <Loader size="large" inverted>
+          {`Haven is ${loadingAction} ${loadingProject}. \n
         This should take 30-60 seconds.`}
         </Loader>
       </Dimmer>
@@ -56,7 +64,7 @@ const SelectProjectDashboard = ({getAllProjectInfo, createNewProject, projectsIn
         loadingStatus={loadingStatus}
         renderLoadingScreen={renderLoadingScreen}
       />
-      {role === "admin" ? adminOnly() : ""}
+      {role === "Admin" ? adminOnly() : ""}
     </div>
   );
 };

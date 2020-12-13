@@ -5,6 +5,7 @@ import axios from "axios";
 const mapStateToProps = (state, { projectName, environment }) => {
   return {
     secrets: state.secrets[projectName + environment] || [],
+    role: state.role,
   };
 };
 
@@ -67,6 +68,11 @@ const mapDispatchToProps = (dispatch, { projectName, environment }) => {
             Version,
           },
         });
+      });
+    },
+    fetchRole: () => {
+      return axios.get("http://localhost:5000/api/getRole").then((res) => {
+        dispatch({ type: "GET_ROLE", payload: res.data });
       });
     },
   };

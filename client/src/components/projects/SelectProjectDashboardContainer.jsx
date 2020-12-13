@@ -8,6 +8,7 @@ import createProjectObject from "../../utils/createProjectObject";
 const mapStateToProps = (state) => {
   return {
     projectsInfo: state.projectsInfo,
+    role: state.role,
   };
 };
 
@@ -39,8 +40,13 @@ const mapDispatchToProps = (dispatch) => {
         .delete("http://localhost:5000/api/projects/" + projectName)
         .then((res) => {
           dispatch({ type: "DELETE_PROJECT", payload: projectName });
-          return res
+          return res;
         });
+    },
+    fetchRole: () => {
+      return axios.get("http://localhost:5000/api/getRole").then((res) => {
+        dispatch({ type: "GET_ROLE", payload: res.data });
+      });
     },
   };
 };
