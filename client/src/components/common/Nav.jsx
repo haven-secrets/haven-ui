@@ -23,7 +23,7 @@ function Nav({role}) {
     </>
   );
   return (
-    <Menu fixed="top" borderless inverted widths={5}>
+    <Menu style={{ background: "linear-gradient(90deg, rgba(0,242,177,1) 35%, rgba(62,230,225,1) 100%)"}} fixed="top" borderless inverted widths={5}>
       <Container>
         <Menu.Item
           header
@@ -36,10 +36,10 @@ function Nav({role}) {
         >
           <Image
             size="tiny"
-            src="/images/logo.png"
+            src="/images/haven-transparent.png"
             style={{ marginRight: "1.5em" }}
           />
-          Haven
+          haven
         </Menu.Item>
         <Menu.Item />
         <Menu.Item
