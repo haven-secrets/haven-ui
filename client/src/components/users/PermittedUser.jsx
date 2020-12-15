@@ -77,7 +77,7 @@ const PermittedUser = ({ user, removePermissions, addPermissions }) => {
         <Modal.Content>
           <Form>
             <Form.Group grouped>
-              <label>HTML checkboxes</label>
+              <label>Permissions</label>
               <Form.Field
                 label="Read"
                 control="input"
