@@ -114,7 +114,7 @@ const SecretList = ({
         ))}
       </Grid>
       <Divider />
-      {role === "Admin" ? adminOnly() : ""}
+      {permissions.includes("Write") ? adminOnly() : ""}
     </div>
   );
 };
