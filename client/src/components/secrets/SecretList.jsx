@@ -9,7 +9,6 @@ const SecretList = ({
   putSecret,
   permissions,
   role,
-  fetchRole,
 }) => {
   const [addSecretFormOpen, setAddSecretFormOpen] = useState(false);
   const [newSecretName, setNewSecretName] = useState("");
@@ -18,8 +17,7 @@ const SecretList = ({
 
   useEffect(() => {
     fetchProjectsEnvSecrets();
-    fetchRole();
-  }, [fetchProjectsEnvSecrets, fetchRole]);
+  }, [fetchProjectsEnvSecrets]);
 
   const handleChange = (e, { value }) => {
     if (e.target.id === "secretName") setNewSecretName(value);

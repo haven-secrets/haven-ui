@@ -8,7 +8,6 @@ const SelectProjectDashboard = ({
   createNewProject,
   projectsInfo,
   deleteProject,
-  fetchRole,
   role,
 }) => {
   const [loadingStatus, setLoadingStatus] = useState(false);
@@ -17,8 +16,7 @@ const SelectProjectDashboard = ({
 
   useEffect(() => {
     getAllProjectInfo();
-    fetchRole();
-  }, [getAllProjectInfo, fetchRole]);
+  }, [getAllProjectInfo]);
 
   const renderLoadingScreen = (project, action) => {
     if (!project && !action) {

@@ -9,12 +9,10 @@ const Project = ({
   users,
   projectEnvPermissions,
   role,
-  fetchRole,
 }) => {
   useEffect(() => {
     getAllProjectInfo();
-    fetchRole();
-  }, [getAllProjectInfo, fetchRole]);
+  }, [getAllProjectInfo]);
 
   const projectName = match.params.project;
   const environment = match.params.environment;

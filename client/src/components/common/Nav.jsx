@@ -1,7 +1,12 @@
 import { Menu, Container, Image } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
-function Nav({role}) {
+function Nav({ role, fetchRole }) {
+  useEffect(() => {
+    fetchRole();
+  }, [fetchRole]);
+
   const adminRoutes = () => (
     <>
       <Menu.Item
@@ -23,7 +28,16 @@ function Nav({role}) {
     </>
   );
   return (
-    <Menu style={{ background: "linear-gradient(90deg, rgba(0,242,177,1) 35%, rgba(62,230,225,1) 100%)"}} fixed="top" borderless inverted widths={5}>
+    <Menu
+      style={{
+        background:
+          "linear-gradient(90deg, rgba(0,242,177,1) 35%, rgba(62,230,225,1) 100%)",
+      }}
+      fixed="top"
+      borderless
+      inverted
+      widths={5}
+    >
       <Container>
         <Menu.Item
           header
