@@ -106,7 +106,7 @@ const SecretList = ({
             secretName={secret.SecretName}
             permissions={permissions}
             secretValue={secret.SecretValue}
-            flagged={secret.Flagged === "true"}
+            flagged={String(secret.Flagged) === "true"}
             version={secret.Version}
             key={secret.SecretName}
             saveNewSecretVersion={saveNewSecretVersion}
