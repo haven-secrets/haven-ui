@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# [![LS-BrandDev-Haven_logo-full-on_light](https://user-images.githubusercontent.com/24786076/103423723-731d1d00-4b65-11eb-82a1-ef01c4840ed6.png)][github]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![shields.io github closed pull requests badge](https://img.shields.io/github/issues-pr-closed/haven-secrets/haven-ui)][pull-requests]
+[![shields.io custom website link badge](https://img.shields.io/static/v1?label=website&message=haven-secrets.github.io&color=blue)][website]
 
-## Available Scripts
+Haven is an open-source, centralized secrets manager. It protects your application secrets through a combination of encryption, access control, and injection-at-runtime. It’s easy to set up, and offers an intuitive GUI to set fine-grained access controls and to view logs. Haven allows small teams to securely manage all of their projects’ secrets---and to do so with a minimum of hassle so that they can get back to developing their applications without sacrificing security.
 
-In the project directory, you can run:
+This package allows you to use a GUI to interact with your Haven instance. If you would prefer a CLI, use the [Haven CLI][haven-cli] package instead. Both of these use the [Haven][haven-core] package under the hood to interact with the AWS architecture that makes up Haven.
 
-### `yarn start`
+## Usage as Admin
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+To use, you must first have an AWS account set up, your default credentials setup in `~/.aws/credentials` and your region setup in `~/.aws/config`.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Example `~/.aws/credentials`:
 
-### `yarn test`
+```
+[default]
+aws_access_key_id=AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Example `~/.aws/config`:
 
-### `yarn build`
+```
+[default]
+region=us-west-2
+output=json
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+After that, simply:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone this repository
+2. Inside the root directory, run `npm run haven-setup ${region}` specifying what supported region you want your Haven instance to be setup.
+3. When setup completes, run `npm install` within the root directory and the `client` directory.
+4. In root directory, run `npm start` to start up the GUI.
+5. To teardown, simply run `npm run haven-teardown`.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Usage as Developer
 
-### `yarn eject`
+As a developer, you don't need an AWS account setup since all users of a Haven instance use the account used during the setup by Admin. Instead:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Clone this repository
+2. Place the `havenAccountInfo.json` file into a `~/.haven` directory.
+3. Inside the root directory, run `npm run haven-userSetup`within an hour after the Admin created your account
+4. When setup completes, run `npm install` within the root directory and the `client` directory.
+5. In root directory, run `npm start` to start up the GUI.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[npm]: https://www.npmjs.com/package/haven-secrets-ui
+[pull-requests]: https://github.com/haven-secrets/haven-ui/pulls
+[website]: https://haven-secrets.github.io/
+[github]: https://github.com/haven-secrets/haven-ui
+[haven-core]: https://github.com/haven-secrets/haven
+[haven-cli]: https://github.com/haven-secrets/haven-cli
